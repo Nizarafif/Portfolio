@@ -9,9 +9,6 @@ import {
   SiDocker, SiFigma, SiVercel
 } from "react-icons/si";
 import { VscVscode } from "react-icons/vsc";
-import dynamic from "next/dynamic";
-
-const ThreeScene = dynamic(() => import("@/components/ThreeScene"), { ssr: false });
 
 const navItems = [
   { href: "#home", label: "Home" },
@@ -268,7 +265,6 @@ export default function Home() {
           id="home"
           className="relative flex flex-col gap-10 pb-16 pt-2 md:flex-row md:items-center md:justify-between overflow-hidden rounded-2xl"
         >
-          <ThreeScene />
           <div className="space-y-6 flex-1 relative z-10">
             <p className="inline-flex items-center rounded-full bg-[#F1F5F9] px-3 py-1 text-xs font-medium text-[#0F766E]">
               Fullstack Developer
