@@ -5,9 +5,13 @@ import { useEffect, useState, type MouseEvent } from "react";
 import { 
   SiJavascript, SiTypescript, SiReact, SiNextdotjs, SiTailwindcss,
   SiNodedotjs, SiMysql, SiPhp, SiLaravel,
-  SiGit, SiGithub, SiPostman
+  SiGit, SiGithub, SiPostman, SiVuedotjs, SiPostgresql, SiFlutter, SiFirebase,
+  SiDocker, SiFigma, SiVercel
 } from "react-icons/si";
 import { VscVscode } from "react-icons/vsc";
+import dynamic from "next/dynamic";
+
+const ThreeScene = dynamic(() => import("@/components/ThreeScene"), { ssr: false });
 
 const navItems = [
   { href: "#home", label: "Home" },
@@ -156,18 +160,25 @@ const skills = {
     { name: "React", icon: SiReact, color: "text-cyan-400" },
     { name: "Next.js", icon: SiNextdotjs, color: "text-slate-900" },
     { name: "Tailwind CSS", icon: SiTailwindcss, color: "text-cyan-500" },
+    { name: "Vue.js", icon: SiVuedotjs, color: "text-emerald-500" },
+    { name: "Flutter", icon: SiFlutter, color: "text-sky-400" },
   ],
   backend: [
     { name: "PHP", icon: SiPhp, color: "text-indigo-500" },
     { name: "Laravel", icon: SiLaravel, color: "text-red-500" },
     { name: "Node.js", icon: SiNodedotjs, color: "text-green-500" },
     { name: "MySQL", icon: SiMysql, color: "text-blue-500" },
+    { name: "PostgreSQL", icon: SiPostgresql, color: "text-sky-600" },
+    { name: "Firebase", icon: SiFirebase, color: "text-amber-500" },
   ],
   tools: [
     { name: "Git", icon: SiGit, color: "text-red-500" },
     { name: "GitHub", icon: SiGithub, color: "text-slate-900" },
     { name: "VS Code", icon: VscVscode, color: "text-blue-500" },
     { name: "Postman", icon: SiPostman, color: "text-orange-500" },
+    { name: "Docker", icon: SiDocker, color: "text-sky-500" },
+    { name: "Figma", icon: SiFigma, color: "text-rose-500" },
+    { name: "Vercel", icon: SiVercel, color: "text-slate-900" },
   ],
 };
 
@@ -269,9 +280,10 @@ export default function Home() {
         {/* Hero */}
         <section
           id="home"
-          className="flex flex-col gap-10 pb-16 pt-2 md:flex-row md:items-center md:justify-between"
+          className="relative flex flex-col gap-10 pb-16 pt-2 md:flex-row md:items-center md:justify-between overflow-hidden rounded-2xl"
         >
-          <div className="space-y-6 flex-1">
+          <ThreeScene />
+          <div className="space-y-6 flex-1 relative z-10">
             <p className="inline-flex items-center rounded-full bg-[#F1F5F9] px-3 py-1 text-xs font-medium text-[#0F766E]">
               Fullstack Developer · Indonesia
             </p>
@@ -305,7 +317,7 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="flex flex-col gap-6 items-center md:items-end">
+          <div className="flex flex-col gap-6 items-center md:items-end relative z-10">
             {/* Profile Photo with Decorative Elements */}
             <div className="relative group">
               {/* Gradient Background Orbs */}
