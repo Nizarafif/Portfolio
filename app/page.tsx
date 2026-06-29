@@ -56,46 +56,32 @@ type Certification = {
 
 const projects: Project[] = [
   {
-    title: "Taxonomy",
-    role: "Open Source Contributor",
+    title: "E-Commerce App",
+    role: "Fullstack Developer",
     problem:
-      "Developers need a modern, performant, and accessible foundation for building content-driven applications with the latest Next.js features.",
+      "Membangun platform belanja online modern yang responsif, cepat, dan memiliki pengalaman pengguna yang mulus untuk manajemen produk dan keranjang belanja.",
     solution:
-      "A comprehensive starting point using Next.js App Router, Prisma, and Tailwind CSS. Implements authentication, MDX support, and a clean UI component system.",
+      "Mengembangkan aplikasi e-commerce menggunakan React, TypeScript, dan Tailwind CSS dengan arsitektur modular, manajemen state keranjang belanja, dan sistem autentikasi.",
     result:
-      "Serves as a reference implementation for thousands of developers adopting the Next.js App Router and server components.",
-    tech: ["Next.js 14", "Prisma", "Tailwind CSS", "Shadcn UI"],
-    github: "https://github.com/shadcn-ui/taxonomy",
-    demo: "https://tx.shadcn.com/",
-    image: "/images/taxonomy.png",
+      "Menghasilkan aplikasi e-commerce berkinerja tinggi dengan antarmuka pengguna yang bersih, responsif, serta alur belanja yang intuitif.",
+    tech: ["React", "TypeScript", "Tailwind CSS"],
+    github: "https://github.com/Nizarafif/e-commerce",
+    demo: "https://e-commerce-six-omega-11.vercel.app/",
+    image: "/images/e-commerce.png",
   },
   {
-    title: "Dub.co",
-    role: "Open Source Contributor",
+    title: "FlowSync",
+    role: "Fullstack Developer",
     problem:
-      "Managing short links and tracking analytics across marketing campaigns is often fragmented and lacks transparency.",
+      "Membangun platform manajemen proyek dan tugas terintegrasi yang memudahkan tim untuk mengelola alur kerja, jadwal, dan kolaborasi dalam satu dasbor dinamis.",
     solution:
-      "An open-source link management infrastructure that provides powerful analytics, custom domains, and programmatic link generation via API.",
+      "Mengembangkan aplikasi FlowSync menggunakan React, TypeScript, Vite, dan Tailwind CSS dengan fitur Kanban Board drag-and-drop, kalender interaktif, dan visualisasi analisis tugas.",
     result:
-      "Processed millions of clicks with low latency, providing real-time insights for marketing teams and developers.",
-    tech: ["Next.js", "Tinybird", "Redis", "Vercel Edge Functions"],
-    github: "https://github.com/dubinc/dub",
-    demo: "https://dub.co",
-    image: "/images/dub.png",
-  },
-  {
-    title: "Next.js Commerce",
-    role: "Frontend Developer",
-    problem:
-      "Building high-performance e-commerce sites requires complex integration with headless CMS and payment gateways while maintaining speed.",
-    solution:
-      "A high-performance e-commerce starter kit featuring edge caching, image optimization, and seamless integration with Shopify and BigCommerce.",
-    result:
-      "Achieved 100/100 Lighthouse scores, ensuring instant page loads and improved conversion rates for online stores.",
-    tech: ["Next.js", "Shopify API", "Tailwind CSS", "Edge Middleware"],
-    github: "https://github.com/vercel/commerce",
-    demo: "https://demo.vercel.store",
-    image: "/images/commerce.png",
+      "Menghasilkan sistem manajemen alur kerja yang responsif dan efisien dengan sinkronisasi visual yang mulus antara penjadwalan kalender dan papan tugas.",
+    tech: ["React", "TypeScript", "Tailwind CSS", "Vite"],
+    github: "https://github.com/Nizarafif/FlowSync",
+    demo: "https://flow-sync-one.vercel.app/",
+    image: "/images/Flowsync.png",
   },
 ];
 
@@ -285,7 +271,7 @@ export default function Home() {
           <ThreeScene />
           <div className="space-y-6 flex-1 relative z-10">
             <p className="inline-flex items-center rounded-full bg-[#F1F5F9] px-3 py-1 text-xs font-medium text-[#0F766E]">
-              Fullstack Developer · Indonesia
+              Fullstack Developer
             </p>
             <h1
               className={`text-3xl font-bold tracking-tight text-[#0B0F19] sm:text-4xl md:text-[2.6rem] md:leading-tight transition duration-150 drop-shadow-sm ${
