@@ -103,7 +103,7 @@ const educationList: Education[] = [
   {
     degree: "Rekayasa Perangkat Lunak",
     institution: "Politeknik Balekambang",
-    period: "2022 - Sekarang",
+    period: "2022",
   },
   {
     degree: "Teknik Komputer dan Jaringan",
