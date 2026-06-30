@@ -263,7 +263,7 @@ export default function Home() {
         {/* Hero */}
         <section
           id="home"
-          className="relative flex flex-col gap-10 pb-16 pt-2 md:flex-row md:items-center md:justify-between overflow-hidden rounded-2xl"
+          className="relative flex flex-col gap-10 pb-16 pt-2 md:flex-row md:items-center md:justify-between rounded-2xl"
         >
           <div className="space-y-6 flex-1 relative z-10">
             <p className="inline-flex items-center rounded-full bg-[#F1F5F9] px-3 py-1 text-xs font-medium text-[#0F766E]">
@@ -301,7 +301,7 @@ export default function Home() {
 
           <div className="flex flex-col gap-6 items-center md:items-end relative z-10">
             {/* Profile Photo with Decorative Elements */}
-            <div className="relative group">
+            <div className="relative group md:mr-4">
               {/* Gradient Background Orbs */}
               <div className="absolute -top-8 -left-8 w-32 h-32 bg-gradient-to-br from-teal-400/30 to-emerald-400/30 rounded-full blur-2xl"></div>
               <div className="absolute -bottom-8 -right-8 w-40 h-40 bg-gradient-to-br from-blue-400/20 to-cyan-400/20 rounded-full blur-2xl"></div>
