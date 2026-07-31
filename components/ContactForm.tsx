@@ -11,7 +11,7 @@ export default function ContactForm() {
     const message = formData.get('message');
     
     const subject = `Portfolio Contact from ${name}`;
-    const body = `Nama: ${name}%0D%0AEmail: ${email}%0D%0A%0D%0APesan:%0D%0A${message}`;
+    const body = `Name: ${name}%0D%0AEmail: ${email}%0D%0A%0D%0AMessage:%0D%0A${message}`;
     
     window.location.href = `mailto:nizarnurafif644@gmail.com?subject=${encodeURIComponent(subject)}&body=${body}`;
   };
@@ -20,7 +20,7 @@ export default function ContactForm() {
     <form onSubmit={handleSubmit} className="space-y-4">
       <div>
         <label htmlFor="name" className="block text-xs font-semibold text-slate-400 mb-1.5 uppercase tracking-wider">
-          Nama Lengkap
+          Full Name
         </label>
         <input
           type="text"
@@ -28,7 +28,7 @@ export default function ContactForm() {
           name="name"
           required
           className="w-full px-4 py-2.5 text-sm bg-slate-900 border border-slate-800 rounded-lg text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-teal-500/30 focus:border-teal-500/40 transition-all"
-          placeholder="Masukkan nama Anda"
+          placeholder="Enter your full name"
         />
       </div>
       
@@ -48,7 +48,7 @@ export default function ContactForm() {
       
       <div>
         <label htmlFor="message" className="block text-xs font-semibold text-slate-400 mb-1.5 uppercase tracking-wider">
-          Pesan
+          Message
         </label>
         <textarea
           id="message"
@@ -56,7 +56,7 @@ export default function ContactForm() {
           required
           rows={5}
           className="w-full px-4 py-2.5 text-sm bg-slate-900 border border-slate-800 rounded-lg text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-teal-500/30 focus:border-teal-500/40 transition-all resize-none"
-          placeholder="Tulis pesan Anda di sini..."
+          placeholder="Write your message here..."
         ></textarea>
       </div>
       
@@ -64,7 +64,7 @@ export default function ContactForm() {
         type="submit"
         className="w-full py-3 px-4 border border-transparent rounded-lg text-sm font-semibold text-white bg-gradient-to-r from-teal-600 to-emerald-600 shadow-lg shadow-teal-500/10 hover:from-teal-500 hover:to-emerald-500 hover:shadow-teal-500/20 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-slate-950 focus:ring-teal-500 transition-all duration-200 hover:-translate-y-0.5"
       >
-        Kirim Pesan via Email
+        Send Message via Email
       </button>
     </form>
   );

@@ -57,7 +57,7 @@ export default function LoginPage() {
         router.refresh();
       }
     } catch {
-      setErrorMsg("Terjadi kesalahan koneksi. Silakan coba lagi.");
+      setErrorMsg("Connection error. Please try again.");
     } finally {
       setIsLoading(false);
     }
@@ -77,10 +77,10 @@ export default function LoginPage() {
             </div>
           </div>
           <h2 className="mt-6 text-center text-2xl font-bold tracking-tight text-white">
-            Admin Portofolio
+            Portfolio Admin
           </h2>
           <p className="mt-2 text-center text-xs text-slate-400">
-            Silakan masuk untuk mengelola data website Anda
+            Please sign in to manage your website data
           </p>
         </div>
       </div>
@@ -96,7 +96,7 @@ export default function LoginPage() {
 
             <div>
               <label htmlFor="email" className="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-2">
-                Alamat Email
+                Email Address
               </label>
               <input
                 id="email"
@@ -113,7 +113,7 @@ export default function LoginPage() {
 
             <div>
               <label htmlFor="password" className="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-2">
-                Kata Sandi
+                Password
               </label>
               <div className="relative">
                 <input
@@ -148,7 +148,7 @@ export default function LoginPage() {
                   className="h-4 w-4 rounded border-slate-800 bg-slate-900 text-teal-600 focus:ring-teal-500 focus:ring-offset-slate-950 cursor-pointer accent-teal-600"
                 />
                 <label htmlFor="remember-me" className="ml-2 block text-xs text-slate-400 cursor-pointer select-none">
-                  Ingat Saya (Simpan Email & Sandi)
+                  Remember Me (Save Email & Password)
                 </label>
               </div>
             </div>
@@ -165,10 +165,10 @@ export default function LoginPage() {
                       <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
                       <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
                     </svg>
-                    Memverifikasi...
+                    Verifying...
                   </span>
                 ) : (
-                  "Masuk"
+                  "Sign In"
                 )}
               </button>
             </div>

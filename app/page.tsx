@@ -65,11 +65,11 @@ const fallbackProjects: Project[] = [
     title: "E-Commerce App",
     role: "Fullstack Developer",
     problem:
-      "Membangun platform belanja online modern yang responsif, cepat, dan memiliki pengalaman pengguna yang mulus untuk manajemen produk dan keranjang belanja.",
+      "Building a modern, responsive, fast, and seamless e-commerce platform for product management and shopping cart experience.",
     solution:
-      "Mengembangkan aplikasi e-commerce menggunakan React, TypeScript, dan Tailwind CSS dengan arsitektur modular, manajemen state keranjang belanja, dan sistem autentikasi.",
+      "Developing the e-commerce application using React, TypeScript, and Tailwind CSS with modular architecture, shopping cart state management, and user authentication.",
     result:
-      "Menghasilkan aplikasi e-commerce berkinerja tinggi dengan antarmuka pengguna yang bersih, responsif, serta alur belanja yang intuitif.",
+      "Delivered a high-performance e-commerce application with a clean, responsive user interface and intuitive shopping workflow.",
     tech: ["React", "TypeScript", "Tailwind CSS"],
     github: "https://github.com/Nizarafif/e-commerce",
     demo: "https://e-commerce-six-omega-11.vercel.app/",
@@ -79,11 +79,11 @@ const fallbackProjects: Project[] = [
     title: "FlowSync",
     role: "Fullstack Developer",
     problem:
-      "Membangun platform manajemen proyek dan tugas terintegrasi yang memudahkan tim untuk mengelola alur kerja, jadwal, dan kolaborasi dalam satu dasbor dinamis.",
+      "Building an integrated project and task management platform to help teams manage workflows, schedules, and collaboration in a single dynamic dashboard.",
     solution:
-      "Mengembangkan aplikasi FlowSync menggunakan React, TypeScript, Vite, dan Tailwind CSS dengan fitur Kanban Board drag-and-drop, kalender interaktif, dan visualisasi analisis tugas.",
+      "Developing the FlowSync application using React, TypeScript, Vite, and Tailwind CSS with drag-and-drop Kanban Board, interactive calendar, and task analysis visualization.",
     result:
-      "Menghasilkan sistem manajemen alur kerja yang responsif dan efisien dengan sinkronisasi visual yang mulus antara penjadwalan kalender dan papan tugas.",
+      "Delivered a responsive and efficient workflow management system with seamless visual synchronization between calendar scheduling and task boards.",
     tech: ["React", "TypeScript", "Tailwind CSS", "Vite"],
     github: "https://github.com/Nizarafif/FlowSync",
     demo: "https://flow-sync-one.vercel.app/",
@@ -97,25 +97,25 @@ const fallbackExperiences: Experience[] = [
     company: "PT Taman Media Indonesia",
     period: "2025",
     description:
-      "Mengembangkan fitur frontend dan backend, serta membantu optimasi database untuk meningkatkan performa aplikasi perusahaan.",
+      "Developed frontend and backend features, and assisted with database optimization to enhance company application performance.",
   },
   {
     role: "Intern Website Developer",
     company: "CV Polibang Creative Studio",
     period: "2023",
     description:
-      "Berpartisipasi dalam pembuatan website klien menggunakan WordPress dan custom coding, serta belajar mengenai manajemen proyek digital.",
+      "Participated in client website development using WordPress and custom coding, and learned about digital project management.",
   },
 ];
 
 const fallbackEducationList: Education[] = [
   {
-    degree: "Rekayasa Perangkat Lunak",
+    degree: "Software Engineering",
     institution: "Politeknik Balekambang",
     period: "2022",
   },
   {
-    degree: "Teknik Komputer dan Jaringan",
+    degree: "Computer and Network Engineering",
     institution: "SMK NU AL HIDAYAH",
     period: "2019 - 2022",
   },
@@ -123,18 +123,18 @@ const fallbackEducationList: Education[] = [
 
 const fallbackCertifications: Certification[] = [
   {
-    name: "Pelatihan Java",
+    name: "Java Training",
     issuer: "Course Provider",
     year: "2022",
     file_url: "/SERTIFIKAT/sertifikat_course.pdf.pdf",
   },
   {
-    name: "Belajar Membuat Aplikasi Web dengan React",
+    name: "Learning to Build Web Applications with React",
     issuer: "Dicoding Indonesia",
     year: "2023",
   },
   {
-    name: "Belajar Fundamental Front-End Web Development",
+    name: "Learning the Fundamentals of Front-End Web Development",
     issuer: "Dicoding Indonesia",
     year: "2023",
   },
@@ -327,30 +327,30 @@ export default async function Home() {
           <div className="space-y-6 flex-1" data-reveal="slide-up">
             <div className="inline-flex items-center gap-1.5 rounded-full border border-teal-500/20 bg-teal-950/30 px-3 py-1 text-xs font-medium text-teal-400">
               <span className="w-1.5 h-1.5 rounded-full bg-teal-400 animate-pulse" />
-              <span>Tersedia untuk Pekerjaan</span>
+              <span>Open to Work</span>
             </div>
             
             <div className="space-y-3">
-              <p className="text-sm font-semibold text-slate-500 uppercase tracking-widest">Selamat Datang</p>
+              <p className="text-sm font-semibold text-slate-500 uppercase tracking-widest">Welcome</p>
               <NameAnimation nameText={nameText} />
             </div>
 
             <p className="max-w-xl text-sm leading-relaxed text-slate-400 sm:text-base text-justify">
-              Saya adalah Fullstack Developer profesional yang berdedikasi untuk menciptakan solusi digital end-to-end yang elegan dan berdampak. Dengan keahlian di frontend dan backend, saya membangun aplikasi web yang tidak hanya responsif dan cepat, tetapi juga scalable, aman, dan memberikan pengalaman pengguna yang intuitif.
+              I am a professional Fullstack Developer dedicated to creating elegant and impactful end-to-end digital solutions. With expertise in both frontend and backend, I build web applications that are not only responsive and fast, but also scalable, secure, and deliver an intuitive user experience.
             </p>
             <div className="flex flex-wrap items-center gap-4 pt-2">
               <a
                 href="#projects"
                 className="inline-flex items-center justify-center rounded-xl bg-gradient-to-r from-teal-600 to-emerald-600 px-6 py-3 text-xs font-bold text-white shadow-lg shadow-teal-500/10 hover:shadow-teal-500/25 transition-all duration-200 hover:-translate-y-0.5 hover:from-teal-500 hover:to-emerald-500"
               >
-                Lihat Proyek Saya
+                View Projects
               </a>
               <a
                 href="/CV/CV.pdf"
                 download="Nizar_Nur_Afif_CV.pdf"
                 className="inline-flex items-center justify-center rounded-xl border border-slate-800 bg-slate-900/60 px-6 py-3 text-xs font-semibold text-slate-300 hover:bg-slate-900 hover:text-white hover:border-slate-700 transition-all duration-200"
               >
-                Unduh CV
+                Download CV
               </a>
             </div>
           </div>
@@ -386,20 +386,20 @@ export default async function Home() {
             {/* Quick Profile Card */}
             <div className="w-full max-w-xs rounded-xl border border-slate-900 bg-slate-900/40 p-5 shadow-xl backdrop-blur-sm">
               <p className="text-[10px] font-bold uppercase tracking-widest text-slate-500">
-                Profil Ringkas
+                Quick Profile
               </p>
               <dl className="mt-4 space-y-2.5 text-xs">
                 <div className="flex justify-between gap-4">
-                  <dt className="text-slate-500">Fokus</dt>
+                  <dt className="text-slate-500">Focus</dt>
                   <dd className="font-semibold text-slate-300">Frontend & Backend</dd>
                 </div>
                 <div className="flex justify-between gap-4">
-                  <dt className="text-slate-500">Spesialisasi</dt>
+                  <dt className="text-slate-500">Specialty</dt>
                   <dd className="font-semibold text-slate-300 text-right">React · Next.js · Laravel</dd>
                 </div>
                 <div className="flex justify-between gap-4">
-                  <dt className="text-slate-500">Ketersediaan</dt>
-                  <dd className="font-semibold text-emerald-400">Bekerja Lepas / Fulltime</dd>
+                  <dt className="text-slate-500">Availability</dt>
+                  <dd className="font-semibold text-emerald-400">Freelance / Full-time</dd>
                 </div>
               </dl>
             </div>
@@ -413,22 +413,16 @@ export default async function Home() {
         >
           <div className="text-center mb-12">
             <h2 className="text-2xl font-extrabold tracking-tight text-white sm:text-3xl bg-gradient-to-r from-white via-slate-300 to-slate-500 bg-clip-text text-transparent">
-              Tentang Saya
+              About Me
             </h2>
             <div className="h-1 w-12 bg-teal-500 mx-auto mt-3 rounded-full" />
           </div>
           <div className="space-y-6 text-sm leading-relaxed text-slate-400 sm:text-base max-w-3xl mx-auto">
             <p className="text-justify">
-              Saya seorang fullstack developer yang berpengalaman membangun aplikasi web
-              dari frontend hingga backend. Terbiasa bekerja dengan stack JavaScript/TypeScript modern
-              (React, Next.js) untuk frontend, dan Node.js dengan Express serta Laravel untuk backend,
-              serta database relational (PostgreSQL, MySQL) maupun NoSQL (MongoDB).
+              I am a full-stack developer experienced in building web applications from frontend to backend. Accustomed to working with the modern JavaScript/TypeScript stack (React, Next.js) on the frontend, and Node.js with Express or Laravel on the backend, along with relational databases (PostgreSQL, MySQL) and NoSQL (MongoDB).
             </p>
             <p className="text-justify">
-              Dalam setiap project, saya fokus pada arsitektur yang scalable, clean code,
-              dan best practices seperti RESTful API design, database optimization, dan
-              security. Saya juga memperhatikan struktur folder, separation of concerns,
-              dan dokumentasi yang baik agar codebase mudah di-maintain oleh tim.
+              In every project, I focus on scalable architecture, clean code, and best practices like RESTful API design, database optimization, and security. I also pay attention to folder structure, separation of concerns, and good documentation to ensure the codebase is easily maintainable by the team.
             </p>
           </div>
         </section>
@@ -440,7 +434,7 @@ export default async function Home() {
         >
           <div className="text-center mb-12">
             <h2 className="text-2xl font-extrabold tracking-tight text-white sm:text-3xl bg-gradient-to-r from-white via-slate-300 to-slate-500 bg-clip-text text-transparent">
-              Keahlian Teknologi
+              Tech Stack & Skills
             </h2>
             <div className="h-1 w-12 bg-teal-500 mx-auto mt-3 rounded-full" />
           </div>
@@ -509,7 +503,7 @@ export default async function Home() {
         >
           <div className="text-center mb-12">
             <h2 className="text-2xl font-extrabold tracking-tight text-white sm:text-3xl bg-gradient-to-r from-white via-slate-300 to-slate-500 bg-clip-text text-transparent">
-              Proyek Portofolio
+              Portfolio Projects
             </h2>
             <div className="h-1 w-12 bg-teal-500 mx-auto mt-3 rounded-full" />
           </div>
@@ -547,15 +541,15 @@ export default async function Home() {
 
                     <div className="space-y-3 text-xs text-slate-400">
                       <div>
-                        <span className="text-[10px] font-bold text-slate-500 uppercase tracking-wider block">Masalah</span>
+                        <span className="text-[10px] font-bold text-slate-500 uppercase tracking-wider block">Problem</span>
                         <p className="mt-1 leading-relaxed text-justify">{project.problem}</p>
                       </div>
                       <div>
-                        <span className="text-[10px] font-bold text-slate-500 uppercase tracking-wider block">Pendekatan</span>
+                        <span className="text-[10px] font-bold text-slate-500 uppercase tracking-wider block">Solution</span>
                         <p className="mt-1 leading-relaxed text-justify">{project.solution}</p>
                       </div>
                       <div>
-                        <span className="text-[10px] font-bold text-slate-500 uppercase tracking-wider block">Hasil / Fitur Utama</span>
+                        <span className="text-[10px] font-bold text-slate-500 uppercase tracking-wider block">Key Features</span>
                         <p className="mt-1 leading-relaxed text-justify">{project.result}</p>
                       </div>
                     </div>
@@ -604,7 +598,7 @@ export default async function Home() {
         >
           <div className="text-center mb-12">
             <h2 className="text-2xl font-extrabold tracking-tight text-white sm:text-3xl bg-gradient-to-r from-white via-slate-300 to-slate-500 bg-clip-text text-transparent">
-              Pengalaman & Pendidikan
+              Experience & Education
             </h2>
             <div className="h-1 w-12 bg-teal-500 mx-auto mt-3 rounded-full" />
           </div>
@@ -613,7 +607,7 @@ export default async function Home() {
               {/* Experience Timeline */}
               <div className="space-y-6">
                 <p className="text-xs font-bold uppercase tracking-widest text-slate-500 border-l-2 border-teal-500 pl-3">
-                  Riwayat Pekerjaan
+                  Work Experience
                 </p>
                 <div className="relative border-l border-slate-800 ml-3 space-y-6 py-2">
                   {experiences.map((exp) => (
@@ -653,7 +647,7 @@ export default async function Home() {
                 {/* Education */}
                 <div className="space-y-4" data-reveal="slide-right">
                   <p className="text-xs font-bold uppercase tracking-widest text-slate-500 border-l-2 border-teal-500 pl-3">
-                    Pendidikan
+                    Education
                   </p>
                   <div className="space-y-4">
                     {educationList.map((edu) => (
@@ -678,7 +672,7 @@ export default async function Home() {
                 {/* Certifications */}
                 <div className="space-y-4" data-reveal="slide-left">
                   <p className="text-xs font-bold uppercase tracking-widest text-slate-500 border-l-2 border-teal-500 pl-3">
-                    Sertifikasi
+                    Certifications
                   </p>
                   <div className="space-y-4">
                     {certifications.map((cert) => (
@@ -701,7 +695,7 @@ export default async function Home() {
                               rel="noreferrer"
                               className="font-bold text-teal-400 hover:text-teal-300 transition-colors inline-flex items-center gap-0.5"
                             >
-                              Lihat Sertifikat &rarr;
+                              View Certificate &rarr;
                             </a>
                           )}
                         </div>
@@ -720,7 +714,7 @@ export default async function Home() {
         >
           <div className="text-center mb-12">
             <h2 className="text-2xl font-extrabold tracking-tight text-white sm:text-3xl bg-gradient-to-r from-white via-slate-300 to-slate-500 bg-clip-text text-transparent">
-              Hubungi Saya
+              Contact Me
             </h2>
             <div className="h-1 w-12 bg-teal-500 mx-auto mt-3 rounded-full" />
           </div>
@@ -731,7 +725,7 @@ export default async function Home() {
                 <svg className="w-5 h-5 text-teal-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                 </svg>
-                <span>Kirim Pesan Langsung</span>
+                <span>Send a Direct Message</span>
               </h3>
               <ContactForm />
             </div>
