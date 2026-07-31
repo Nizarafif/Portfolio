@@ -18,25 +18,7 @@ export default function ContactForm() {
     const email = formData.get('email') as string;
     const message = formData.get('message') as string;
 
-    try {
-      // Simpan langsung pesan ke tabel 'contacts' di Supabase
-      const { error } = await supabase
-        .from('contacts')
-        .insert([{ name, email, message }]);
-
-      if (error) {
-        throw error;
-      }
-
-      setStatus({
-        type: 'success',
-        message: 'Thank you! Your message has been sent successfully.'
-      });
-      e.currentTarget.reset();
-    } catch (err: any) {
-      console.error("Gagal mengirim pesan:", err);
-      
-      // Fallback ke mailto jika tabel 'contacts' belum dibuat di Supabase
+    const triggerEmailFallback = () => {
       const subject = `Portfolio Contact from ${name}`;
       const body = `Name: ${name}%0D%0AEmail: ${email}%0D%0A%0D%0AMessage:%0D%0A${message}`;
       window.location.href = `mailto:nizarnurafif644@gmail.com?subject=${encodeURIComponent(subject)}&body=${body}`;
@@ -45,6 +27,28 @@ export default function ContactForm() {
         type: 'success',
         message: 'Opening your default email app...'
       });
+    };
+
+    try {
+      // Simpan langsung pesan ke tabel 'contacts' di Supabase
+      const { error } = await supabase
+        .from('contacts')
+        .insert([{ name, email, message }]);
+
+      if (error) {
+        console.warn("Gagal menyimpan ke database, beralih ke email:", error.message);
+        triggerEmailFallback();
+        return;
+      }
+
+      setStatus({
+        type: 'success',
+        message: 'Thank you! Your message has been sent successfully.'
+      });
+      e.currentTarget.reset();
+    } catch (err) {
+      console.warn("Kesalahan koneksi database, beralih ke email:", err);
+      triggerEmailFallback();
     } finally {
       setIsSubmitting(false);
     }
