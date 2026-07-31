@@ -324,7 +324,7 @@ export default async function Home() {
           id="home"
           className="relative flex flex-col gap-12 pb-20 pt-8 md:flex-row md:items-center md:justify-between scroll-mt-24"
         >
-          <div className="space-y-6 flex-1">
+          <div className="space-y-6 flex-1" data-reveal="slide-up">
             <div className="inline-flex items-center gap-1.5 rounded-full border border-teal-500/20 bg-teal-950/30 px-3 py-1 text-xs font-medium text-teal-400">
               <span className="w-1.5 h-1.5 rounded-full bg-teal-400 animate-pulse" />
               <span>Tersedia untuk Pekerjaan</span>
@@ -355,7 +355,7 @@ export default async function Home() {
             </div>
           </div>
 
-          <div className="flex flex-col gap-6 items-center md:items-end">
+          <div className="flex flex-col gap-6 items-center md:items-end" data-reveal="slide-left">
             {/* Profile Photo */}
             <div className="relative group">
               {/* Photo Glow behind */}
@@ -447,7 +447,7 @@ export default async function Home() {
           
           <div className="grid gap-6 sm:grid-cols-3">
             {/* Frontend */}
-            <div className="space-y-4 rounded-2xl border border-slate-900 bg-slate-900/20 p-6 transition-all duration-300 hover:border-teal-500/35 hover:shadow-[0_0_25px_rgba(13,148,136,0.06)] hover:-translate-y-0.5">
+            <div className="space-y-4 rounded-2xl border border-slate-900 bg-slate-900/20 p-6 transition-all duration-300 hover:border-teal-500/35 hover:shadow-[0_0_25px_rgba(13,148,136,0.06)] hover:-translate-y-0.5" data-reveal="slide-right">
               <p className="text-[10px] font-bold uppercase tracking-widest text-teal-400">
                 Frontend Development
               </p>
@@ -465,7 +465,7 @@ export default async function Home() {
             </div>
             
             {/* Backend */}
-            <div className="space-y-4 rounded-2xl border border-slate-900 bg-slate-900/20 p-6 transition-all duration-300 hover:border-teal-500/35 hover:shadow-[0_0_25px_rgba(13,148,136,0.06)] hover:-translate-y-0.5">
+            <div className="space-y-4 rounded-2xl border border-slate-900 bg-slate-900/20 p-6 transition-all duration-300 hover:border-teal-500/35 hover:shadow-[0_0_25px_rgba(13,148,136,0.06)] hover:-translate-y-0.5" data-reveal="slide-up">
               <p className="text-[10px] font-bold uppercase tracking-widest text-teal-400">
                 Backend Development
               </p>
@@ -483,7 +483,7 @@ export default async function Home() {
             </div>
             
             {/* Tools */}
-            <div className="space-y-4 rounded-2xl border border-slate-900 bg-slate-900/20 p-6 transition-all duration-300 hover:border-teal-500/35 hover:shadow-[0_0_25px_rgba(13,148,136,0.06)] hover:-translate-y-0.5">
+            <div className="space-y-4 rounded-2xl border border-slate-900 bg-slate-900/20 p-6 transition-all duration-300 hover:border-teal-500/35 hover:shadow-[0_0_25px_rgba(13,148,136,0.06)] hover:-translate-y-0.5" data-reveal="slide-left">
               <p className="text-[10px] font-bold uppercase tracking-widest text-teal-400">
                 Development Tools
               </p>
@@ -519,6 +519,7 @@ export default async function Home() {
                 <article
                   key={project.title}
                   className="group flex flex-col overflow-hidden rounded-2xl border border-slate-900 bg-slate-900/30 transition-all duration-300 hover:border-teal-500/35 hover:shadow-[0_0_30px_rgba(13,148,136,0.09)]"
+                  data-reveal="slide-up"
                 >
                   {project.image_url ? (
                     <div className="relative h-52 w-full overflow-hidden border-b border-slate-900/80">
@@ -619,6 +620,7 @@ export default async function Home() {
                     <div
                       key={exp.role + exp.company}
                       className="relative pl-6 group"
+                      data-reveal="slide-up"
                     >
                       {/* Timeline Dot */}
                       <span className="absolute -left-[5px] top-1.5 h-2 w-2 rounded-full bg-teal-500 ring-4 ring-slate-950 group-hover:scale-125 transition-transform duration-200" />
@@ -649,7 +651,7 @@ export default async function Home() {
               {/* Education & Certifications */}
               <div className="grid gap-6 md:grid-cols-2 pt-4">
                 {/* Education */}
-                <div className="space-y-4">
+                <div className="space-y-4" data-reveal="slide-right">
                   <p className="text-xs font-bold uppercase tracking-widest text-slate-500 border-l-2 border-teal-500 pl-3">
                     Pendidikan
                   </p>
@@ -674,7 +676,7 @@ export default async function Home() {
                 </div>
 
                 {/* Certifications */}
-                <div className="space-y-4">
+                <div className="space-y-4" data-reveal="slide-left">
                   <p className="text-xs font-bold uppercase tracking-widest text-slate-500 border-l-2 border-teal-500 pl-3">
                     Sertifikasi
                   </p>
@@ -724,7 +726,7 @@ export default async function Home() {
           </div>
           
           <div className="max-w-2xl mx-auto">
-            <div className="rounded-2xl border border-slate-900 bg-slate-900/30 p-6 md:p-8 shadow-xl backdrop-blur-sm">
+            <div className="rounded-2xl border border-slate-900 bg-slate-900/30 p-6 md:p-8 shadow-xl backdrop-blur-sm" data-reveal="slide-up">
               <h3 className="text-sm font-bold text-white mb-6 flex items-center gap-2">
                 <svg className="w-5 h-5 text-teal-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
