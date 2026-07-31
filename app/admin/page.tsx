@@ -73,6 +73,53 @@ export default function AdminPage() {
     color_class: "",
   });
 
+  const handleSkillNameChange = (name: string) => {
+    const normalized = name.toLowerCase().replace(/[\s\.-]/g, "");
+    
+    const lookup: Record<string, { icon: string; color: string; cat: string }> = {
+      javascript: { icon: "SiJavascript", color: "text-yellow-400", cat: "frontend" },
+      js: { icon: "SiJavascript", color: "text-yellow-400", cat: "frontend" },
+      typescript: { icon: "SiTypescript", color: "text-blue-500", cat: "frontend" },
+      ts: { icon: "SiTypescript", color: "text-blue-500", cat: "frontend" },
+      react: { icon: "SiReact", color: "text-cyan-400", cat: "frontend" },
+      reactjs: { icon: "SiReact", color: "text-cyan-400", cat: "frontend" },
+      nextjs: { icon: "SiNextdotjs", color: "text-white", cat: "frontend" },
+      next: { icon: "SiNextdotjs", color: "text-white", cat: "frontend" },
+      tailwind: { icon: "SiTailwindcss", color: "text-cyan-450", cat: "frontend" },
+      tailwindcss: { icon: "SiTailwindcss", color: "text-cyan-450", cat: "frontend" },
+      vue: { icon: "SiVuedotjs", color: "text-emerald-500", cat: "frontend" },
+      vuejs: { icon: "SiVuedotjs", color: "text-emerald-500", cat: "frontend" },
+      flutter: { icon: "SiFlutter", color: "text-sky-400", cat: "frontend" },
+      php: { icon: "SiPhp", color: "text-indigo-400", cat: "backend" },
+      laravel: { icon: "SiLaravel", color: "text-red-500", cat: "backend" },
+      nodejs: { icon: "SiNodedotjs", color: "text-green-500", cat: "backend" },
+      node: { icon: "SiNodedotjs", color: "text-green-500", cat: "backend" },
+      mysql: { icon: "SiMysql", color: "text-blue-400", cat: "backend" },
+      postgresql: { icon: "SiPostgresql", color: "text-sky-500", cat: "backend" },
+      postgres: { icon: "SiPostgresql", color: "text-sky-500", cat: "backend" },
+      firebase: { icon: "SiFirebase", color: "text-amber-500", cat: "backend" },
+      git: { icon: "SiGit", color: "text-orange-500", cat: "tools" },
+      github: { icon: "SiGithub", color: "text-slate-300", cat: "tools" },
+      vscode: { icon: "VscVscode", color: "text-blue-500", cat: "tools" },
+      postman: { icon: "SiPostman", color: "text-orange-500", cat: "tools" },
+      docker: { icon: "SiDocker", color: "text-blue-400", cat: "tools" },
+      figma: { icon: "SiFigma", color: "text-rose-500", cat: "tools" },
+      vercel: { icon: "SiVercel", color: "text-white", cat: "tools" },
+    };
+
+    const matched = lookup[normalized];
+    if (matched) {
+      setSkillForm({
+        name,
+        category: matched.cat,
+        icon_name: matched.icon,
+        color_class: matched.color,
+      });
+    } else {
+      setSkillForm(prev => ({ ...prev, name }));
+    }
+  };
+
   // File Upload State
   const [uploadingFile, setUploadingFile] = useState(false);
 
@@ -737,7 +784,7 @@ export default function AdminPage() {
                         type="text"
                         required
                         value={skillForm.name}
-                        onChange={(e) => setSkillForm(prev => ({ ...prev, name: e.target.value }))}
+                        onChange={(e) => handleSkillNameChange(e.target.value)}
                         className="w-full px-3 py-2 text-xs bg-slate-900 border border-slate-800 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent text-white"
                         placeholder="Contoh: Next.js"
                       />

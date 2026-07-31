@@ -262,9 +262,11 @@ export default async function Home() {
       const backend = getCategorySkills('backend');
       const tools = getCategorySkills('tools');
 
-      if (frontend.length > 0 || backend.length > 0 || tools.length > 0) {
-        skills = { frontend, backend, tools };
-      }
+      skills = {
+        frontend: frontend.length > 0 ? frontend : fallbackSkills.frontend,
+        backend: backend.length > 0 ? backend : fallbackSkills.backend,
+        tools: tools.length > 0 ? tools : fallbackSkills.tools,
+      };
     }
   } catch (error) {
     console.warn("Koneksi Supabase belum aktif atau menggunakan fallback lokal.", error);
