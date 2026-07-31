@@ -1,23 +1,67 @@
 'use client';
 
-import { type FormEvent } from "react";
+import { useState, type FormEvent } from "react";
+import { createClient } from "@/utils/supabase/client";
 
 export default function ContactForm() {
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const supabase = createClient();
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [status, setStatus] = useState<{ type: 'success' | 'error'; message: string } | null>(null);
+
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setIsSubmitting(true);
+    setStatus(null);
+
     const formData = new FormData(e.currentTarget);
-    const name = formData.get('name');
-    const email = formData.get('email');
-    const message = formData.get('message');
-    
-    const subject = `Portfolio Contact from ${name}`;
-    const body = `Name: ${name}%0D%0AEmail: ${email}%0D%0A%0D%0AMessage:%0D%0A${message}`;
-    
-    window.location.href = `mailto:nizarnurafif644@gmail.com?subject=${encodeURIComponent(subject)}&body=${body}`;
+    const name = formData.get('name') as string;
+    const email = formData.get('email') as string;
+    const message = formData.get('message') as string;
+
+    try {
+      // Simpan langsung pesan ke tabel 'contacts' di Supabase
+      const { error } = await supabase
+        .from('contacts')
+        .insert([{ name, email, message }]);
+
+      if (error) {
+        throw error;
+      }
+
+      setStatus({
+        type: 'success',
+        message: 'Thank you! Your message has been sent successfully.'
+      });
+      e.currentTarget.reset();
+    } catch (err: any) {
+      console.error("Gagal mengirim pesan:", err);
+      
+      // Fallback ke mailto jika tabel 'contacts' belum dibuat di Supabase
+      const subject = `Portfolio Contact from ${name}`;
+      const body = `Name: ${name}%0D%0AEmail: ${email}%0D%0A%0D%0AMessage:%0D%0A${message}`;
+      window.location.href = `mailto:nizarnurafif644@gmail.com?subject=${encodeURIComponent(subject)}&body=${body}`;
+      
+      setStatus({
+        type: 'success',
+        message: 'Opening your default email app...'
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
+      {status && (
+        <div className={`p-3 rounded-lg text-xs border ${
+          status.type === 'success' 
+            ? 'bg-emerald-950/40 border-emerald-500/30 text-emerald-400' 
+            : 'bg-red-950/40 border-red-500/30 text-red-400'
+        }`}>
+          {status.type === 'success' ? '✓' : '⚠️'} {status.message}
+        </div>
+      )}
+
       <div>
         <label htmlFor="name" className="block text-xs font-semibold text-slate-400 mb-1.5 uppercase tracking-wider">
           Full Name
@@ -62,9 +106,10 @@ export default function ContactForm() {
       
       <button
         type="submit"
-        className="w-full py-3 px-4 border border-transparent rounded-lg text-sm font-semibold text-white bg-gradient-to-r from-teal-600 to-emerald-600 shadow-lg shadow-teal-500/10 hover:from-teal-500 hover:to-emerald-500 hover:shadow-teal-500/20 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-slate-950 focus:ring-teal-500 transition-all duration-200 hover:-translate-y-0.5"
+        disabled={isSubmitting}
+        className="w-full py-3 px-4 border border-transparent rounded-lg text-sm font-semibold text-white bg-gradient-to-r from-teal-600 to-emerald-600 shadow-lg shadow-teal-500/10 hover:from-teal-500 hover:to-emerald-500 hover:shadow-teal-500/20 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-slate-950 focus:ring-teal-500 transition-all duration-200 hover:-translate-y-0.5 disabled:opacity-50 disabled:pointer-events-none"
       >
-        Send Message via Email
+        {isSubmitting ? 'Sending Message...' : 'Send Message'}
       </button>
     </form>
   );

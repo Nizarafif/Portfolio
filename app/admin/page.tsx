@@ -16,10 +16,11 @@ import {
   Loader2, 
   X,
   CheckCircle,
-  AlertTriangle
+  AlertTriangle,
+  Mail
 } from "lucide-react";
 
-type TabType = "projects" | "experiences" | "education" | "certifications" | "skills";
+type TabType = "projects" | "experiences" | "education" | "certifications" | "skills" | "contacts";
 
 export default function AdminPage() {
   const supabase = createClient();
@@ -326,6 +327,7 @@ export default function AdminPage() {
     { id: "education", label: "Pendidikan", icon: GraduationCap },
     { id: "certifications", label: "Sertifikasi", icon: Award },
     { id: "skills", label: "Keahlian", icon: Cpu },
+    { id: "contacts", label: "Kotak Masuk", icon: Mail },
   ];
 
   return (
@@ -336,13 +338,15 @@ export default function AdminPage() {
           <h1 className="text-2xl font-bold tracking-tight text-white">Dashboard Portofolio</h1>
           <p className="text-xs text-slate-400 mt-1">Kelola data portofolio pribadi Anda dengan mudah</p>
         </div>
-        <button
-          onClick={handleOpenAddModal}
-          className="inline-flex items-center gap-2 rounded-lg bg-teal-600 px-4 py-2.5 text-xs font-semibold text-white shadow-lg shadow-teal-700/20 transition-all hover:bg-teal-500 hover:-translate-y-0.5"
-        >
-          <Plus className="h-4 w-4" />
-          <span>Tambah Baru</span>
-        </button>
+        {activeTab !== "contacts" && (
+          <button
+            onClick={handleOpenAddModal}
+            className="inline-flex items-center gap-2 rounded-lg bg-teal-600 px-4 py-2.5 text-xs font-semibold text-white shadow-lg shadow-teal-700/20 transition-all hover:bg-teal-500 hover:-translate-y-0.5"
+          >
+            <Plus className="h-4 w-4" />
+            <span>Tambah Baru</span>
+          </button>
+        )}
       </div>
 
       {/* Tabs Menu */}
@@ -392,6 +396,7 @@ export default function AdminPage() {
                     {activeTab === "education" && <th className="p-4">Institusi & Periode</th>}
                     {activeTab === "certifications" && <th className="p-4">Penerbit & Tahun</th>}
                     {activeTab === "skills" && <th className="p-4">Kategori & Visual</th>}
+                    {activeTab === "contacts" && <th className="p-4">Pesan</th>}
                     <th className="p-4 text-right">Aksi</th>
                   </tr>
                 </thead>
@@ -404,6 +409,17 @@ export default function AdminPage() {
                         {activeTab === "education" && item.degree}
                         {activeTab === "certifications" && item.name}
                         {activeTab === "skills" && item.name}
+                        {activeTab === "contacts" && (
+                          <div>
+                            <div className="text-white font-bold">{item.name}</div>
+                            <a href={`mailto:${item.email}`} className="text-teal-400 hover:text-teal-300 font-semibold text-[10px]">
+                              {item.email}
+                            </a>
+                            <div className="text-[10px] text-slate-500 mt-0.5">
+                              {new Date(item.created_at).toLocaleString('id-ID')}
+                            </div>
+                          </div>
+                        )}
                       </td>
                       {/* Projects Specific Columns */}
                       {activeTab === "projects" && (
@@ -450,15 +466,23 @@ export default function AdminPage() {
                           </span>
                         </td>
                       )}
+                      {/* Contacts Specific Columns */}
+                      {activeTab === "contacts" && (
+                        <td className="p-4 max-w-xs md:max-w-md whitespace-normal break-words leading-relaxed text-slate-300">
+                          {item.message}
+                        </td>
+                      )}
                       {/* Operations */}
                       <td className="p-4 text-right">
                         <div className="flex justify-end gap-2">
-                          <button
-                            onClick={() => handleOpenEditModal(item)}
-                            className="p-1.5 rounded bg-slate-800 text-slate-400 hover:text-white hover:bg-slate-700 transition-colors"
-                          >
-                            <Pencil className="h-3.5 w-3.5" />
-                          </button>
+                          {activeTab !== "contacts" && (
+                            <button
+                              onClick={() => handleOpenEditModal(item)}
+                              className="p-1.5 rounded bg-slate-800 text-slate-400 hover:text-white hover:bg-slate-700 transition-colors"
+                            >
+                              <Pencil className="h-3.5 w-3.5" />
+                            </button>
+                          )}
                           <button
                             onClick={() => handleDelete(item.id)}
                             className="p-1.5 rounded bg-red-950/40 text-red-400 hover:text-red-300 hover:bg-red-950/80 transition-colors"
