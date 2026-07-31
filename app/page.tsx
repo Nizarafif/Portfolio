@@ -1,7 +1,8 @@
-'use client';
-
 import Image from "next/image";
-import { useEffect, useState, type MouseEvent } from "react";
+import { createClient } from "@/utils/supabase/server";
+import { getIcon } from "@/components/icons-map";
+import NameAnimation from "@/components/NameAnimation";
+import ContactForm from "@/components/ContactForm";
 import { 
   SiJavascript, SiTypescript, SiReact, SiNextdotjs, SiTailwindcss,
   SiNodedotjs, SiMysql, SiPhp, SiLaravel,
@@ -20,6 +21,7 @@ const navItems = [
 ];
 
 type Project = {
+  id?: string;
   title: string;
   role: string;
   problem: string;
@@ -28,10 +30,11 @@ type Project = {
   tech: string[];
   github: string;
   demo?: string;
-  image?: string;
+  image_url?: string;
 };
 
 type Experience = {
+  id?: string;
   role: string;
   company: string;
   period: string;
@@ -39,19 +42,22 @@ type Experience = {
 };
 
 type Education = {
+  id?: string;
   degree: string;
   institution: string;
   period: string;
 };
 
 type Certification = {
+  id?: string;
   name: string;
   issuer: string;
   year: string;
-  file?: string;
+  file_url?: string;
 };
 
-const projects: Project[] = [
+// Fallback Static Data
+const fallbackProjects: Project[] = [
   {
     title: "E-Commerce App",
     role: "Fullstack Developer",
@@ -64,7 +70,7 @@ const projects: Project[] = [
     tech: ["React", "TypeScript", "Tailwind CSS"],
     github: "https://github.com/Nizarafif/e-commerce",
     demo: "https://e-commerce-six-omega-11.vercel.app/",
-    image: "/images/e-commerce.png",
+    image_url: "/images/e-commerce.png",
   },
   {
     title: "FlowSync",
@@ -78,11 +84,11 @@ const projects: Project[] = [
     tech: ["React", "TypeScript", "Tailwind CSS", "Vite"],
     github: "https://github.com/Nizarafif/FlowSync",
     demo: "https://flow-sync-one.vercel.app/",
-    image: "/images/Flowsync.png",
+    image_url: "/images/Flowsync.png",
   },
 ];
 
-const experiences: Experience[] = [
+const fallbackExperiences: Experience[] = [
   {
     role: "Intern Full Stack Developer",
     company: "PT Taman Media Indonesia",
@@ -99,7 +105,7 @@ const experiences: Experience[] = [
   },
 ];
 
-const educationList: Education[] = [
+const fallbackEducationList: Education[] = [
   {
     degree: "Rekayasa Perangkat Lunak",
     institution: "Politeknik Balekambang",
@@ -112,12 +118,12 @@ const educationList: Education[] = [
   },
 ];
 
-const certifications: Certification[] = [
+const fallbackCertifications: Certification[] = [
   {
     name: "Pelatihan Java",
     issuer: "Course Provider",
     year: "2022",
-    file: "/SERTIFIKAT/sertifikat_course.pdf.pdf",
+    file_url: "/SERTIFIKAT/sertifikat_course.pdf.pdf",
   },
   {
     name: "Belajar Membuat Aplikasi Web dengan React",
@@ -136,7 +142,7 @@ const certifications: Certification[] = [
   },
 ];
 
-const skills = {
+const fallbackSkills = {
   frontend: [
     { name: "JavaScript (ES6+)", icon: SiJavascript, color: "text-yellow-400" },
     { name: "TypeScript", icon: SiTypescript, color: "text-blue-600" },
@@ -165,61 +171,102 @@ const skills = {
   ],
 };
 
-export default function Home() {
+export default async function Home() {
   const year = new Date().getFullYear();
-
   const nameText = "Nizar Nur Afif";
-  const [displayName, setDisplayName] = useState(nameText);
-  const [isAnimatingName, setIsAnimatingName] = useState(true);
 
-  useEffect(() => {
-    const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
-    let frame = 0;
-    const totalFrames = nameText.length + 6;
+  let projects: Project[] = fallbackProjects;
+  let experiences: Experience[] = fallbackExperiences;
+  let educationList: Education[] = fallbackEducationList;
+  let certifications: Certification[] = fallbackCertifications;
+  let skills = fallbackSkills;
 
-    const intervalId = setInterval(() => {
-      frame += 1;
+  try {
+    const supabase = await createClient();
 
-      if (frame >= totalFrames) {
-        setDisplayName(nameText);
-        setIsAnimatingName(false);
-        clearInterval(intervalId);
-        return;
+    // Fetch projects
+    const { data: dbProjects, error: projectsErr } = await supabase
+      .from("projects")
+      .select("*")
+      .order("created_at", { ascending: true });
+    
+    if (dbProjects && dbProjects.length > 0 && !projectsErr) {
+      projects = dbProjects.map(p => ({
+        id: p.id,
+        title: p.title,
+        role: p.role,
+        problem: p.problem,
+        solution: p.solution,
+        result: p.result,
+        tech: p.tech,
+        github: p.github,
+        demo: p.demo || undefined,
+        image_url: p.image_url || undefined,
+      }));
+    }
+
+    // Fetch experiences
+    const { data: dbExperiences, error: expErr } = await supabase
+      .from("experiences")
+      .select("*")
+      .order("created_at", { ascending: false });
+    
+    if (dbExperiences && dbExperiences.length > 0 && !expErr) {
+      experiences = dbExperiences;
+    }
+
+    // Fetch education
+    const { data: dbEducation, error: eduErr } = await supabase
+      .from("education")
+      .select("*")
+      .order("created_at", { ascending: false });
+    
+    if (dbEducation && dbEducation.length > 0 && !eduErr) {
+      educationList = dbEducation;
+    }
+
+    // Fetch certifications
+    const { data: dbCertifications, error: certErr } = await supabase
+      .from("certifications")
+      .select("*")
+      .order("created_at", { ascending: false });
+    
+    if (dbCertifications && dbCertifications.length > 0 && !certErr) {
+      certifications = dbCertifications;
+    }
+
+    // Fetch skills
+    const { data: dbSkills, error: skillsErr } = await supabase
+      .from("skills")
+      .select("*")
+      .order("created_at", { ascending: true });
+    
+    if (dbSkills && dbSkills.length > 0 && !skillsErr) {
+      const getCategorySkills = (cat: 'frontend' | 'backend' | 'tools') => {
+        return dbSkills
+          .filter(s => s.category === cat)
+          .map(s => {
+            const mappedIcon = getIcon(s.icon_name);
+            return {
+              name: s.name,
+              icon: mappedIcon || SiJavascript,
+              color: s.color_class,
+            };
+          });
+      };
+
+      const frontend = getCategorySkills('frontend');
+      const backend = getCategorySkills('backend');
+      const tools = getCategorySkills('tools');
+
+      // Hanya gunakan data dari database jika salah satu kategori memiliki data
+      if (frontend.length > 0 || backend.length > 0 || tools.length > 0) {
+        skills = { frontend, backend, tools };
       }
-
-      setDisplayName(() =>
-        nameText
-          .split("")
-          .map((char, index) => {
-            if (char === " ") return " ";
-            if (index < frame - 2) return nameText[index];
-            return chars[Math.floor(Math.random() * chars.length)];
-          })
-          .join("")
-      );
-    }, 70);
-
-    return () => clearInterval(intervalId);
-  }, [nameText]);
-
-  const handleSmoothScroll = (
-    event: MouseEvent<HTMLAnchorElement>,
-    targetHref: string
-  ) => {
-    event.preventDefault();
-    const targetId = targetHref.replace("#", "");
-    const element = document.getElementById(targetId);
-    if (!element) return;
-
-    const headerOffset = 80; 
-    const elementPosition = element.getBoundingClientRect().top + window.scrollY;
-    const offsetPosition = elementPosition - headerOffset;
-
-    window.scrollTo({
-      top: offsetPosition,
-      behavior: "smooth",
-    });
-  };
+    }
+  } catch (error) {
+    console.warn("Koneksi Supabase belum dikonfigurasi atau gagal. Menggunakan data fallback lokal.", error);
+  }
 
   return (
     <div className="min-h-screen bg-slate-50 text-[#111827] relative">
@@ -249,8 +296,7 @@ export default function Home() {
               <a
                 key={item.href}
                 href={item.href}
-                onClick={(event) => handleSmoothScroll(event, item.href)}
-                className="rounded-full px-2 py-1 transition-colors duration-150 hover:bg-[#F1F5F9] hover:text-[#0B0F19]"
+                className="rounded-full px-3 py-1.5 transition-colors duration-150 hover:bg-[#F1F5F9] hover:text-[#0B0F19]"
               >
                 {item.label}
               </a>
@@ -263,28 +309,19 @@ export default function Home() {
         {/* Hero */}
         <section
           id="home"
-          className="relative flex flex-col gap-10 pb-16 pt-2 md:flex-row md:items-center md:justify-between rounded-2xl"
+          className="relative flex flex-col gap-10 pb-16 pt-2 md:flex-row md:items-center md:justify-between rounded-2xl scroll-mt-20"
         >
           <div className="space-y-6 flex-1 relative z-10">
             <p className="inline-flex items-center rounded-full bg-[#F1F5F9] px-3 py-1 text-xs font-medium text-[#0F766E]">
               Fullstack Developer
             </p>
-            <h1
-              className={`text-3xl font-bold tracking-tight text-[#0B0F19] sm:text-4xl md:text-[2.6rem] md:leading-tight transition duration-150 drop-shadow-sm ${
-                isAnimatingName ? "blur-[1px]" : ""
-              }`}
-            >
-              <span className="bg-gradient-to-r from-[#0B0F19] to-slate-600 bg-clip-text text-transparent">
-                {displayName}
-              </span>
-            </h1>
+            <NameAnimation nameText={nameText} />
             <p className="max-w-xl text-sm leading-relaxed text-slate-600 sm:text-base text-justify">
               Saya adalah Fullstack Developer profesional yang berdedikasi untuk menciptakan solusi digital end-to-end yang elegan dan berdampak. Dengan keahlian di frontend dan backend, saya membangun aplikasi web yang tidak hanya responsif dan cepat, tetapi juga scalable, aman, dan memberikan pengalaman pengguna yang intuitif.
             </p>
             <div className="flex flex-wrap items-center gap-3">
               <a
                 href="#projects"
-                onClick={(event) => handleSmoothScroll(event, "#projects")}
                 className="inline-flex items-center justify-center rounded-lg bg-[#0F766E] px-5 py-2.5 text-xs font-semibold text-white shadow-lg shadow-teal-700/20 transition-all duration-200 hover:-translate-y-1 hover:bg-[#0c5c56] hover:shadow-teal-700/30"
               >
                 View Projects
@@ -372,7 +409,7 @@ export default function Home() {
         {/* About */}
         <section
           id="about"
-          className="border-t border-[#E2E8F0] py-10 md:py-12"
+          className="border-t border-[#E2E8F0] py-10 md:py-12 scroll-mt-20"
         >
           <div className="text-center mb-8">
             <h2 className="text-2xl font-bold text-[#0B0F19]">About Me</h2>
@@ -396,7 +433,7 @@ export default function Home() {
         {/* Skills */}
         <section
           id="skills"
-          className="border-t border-[#E2E8F0] py-10 md:py-12"
+          className="border-t border-[#E2E8F0] py-10 md:py-12 scroll-mt-20"
         >
           <div className="text-center mb-10">
             <h2 className="text-2xl font-bold text-[#0B0F19]">Skills</h2>
@@ -407,12 +444,15 @@ export default function Home() {
                 Frontend
               </p>
               <ul className="mt-2 space-y-2 text-sm text-slate-700">
-                {skills.frontend.map((item) => (
-                  <li key={item.name} className="flex items-center gap-3 rounded-lg border border-transparent p-2 transition-colors hover:border-slate-200 hover:bg-slate-50">
-                      <item.icon className={`h-5 w-5 ${item.color}`} />
-                      <span className="font-medium">{item.name}</span>
-                  </li>
-                ))}
+                {skills.frontend.map((item) => {
+                  const SkillIcon = item.icon;
+                  return (
+                    <li key={item.name} className="flex items-center gap-3 rounded-lg border border-transparent p-2 transition-colors hover:border-slate-200 hover:bg-slate-50">
+                        <SkillIcon className={`h-5 w-5 ${item.color}`} />
+                        <span className="font-medium">{item.name}</span>
+                    </li>
+                  );
+                })}
               </ul>
             </div>
             <div className="space-y-3 rounded-xl border border-slate-200 bg-white/50 p-5 shadow-sm transition-all hover:shadow-md hover:border-teal-200 hover:bg-white/80">
@@ -420,12 +460,15 @@ export default function Home() {
                 Backend
               </p>
               <ul className="mt-2 space-y-2 text-sm text-slate-700">
-                {skills.backend.map((item) => (
-                  <li key={item.name} className="flex items-center gap-3 rounded-lg border border-transparent p-2 transition-colors hover:border-slate-200 hover:bg-slate-50">
-                      <item.icon className={`h-5 w-5 ${item.color}`} />
-                      <span className="font-medium">{item.name}</span>
-                  </li>
-                ))}
+                {skills.backend.map((item) => {
+                  const SkillIcon = item.icon;
+                  return (
+                    <li key={item.name} className="flex items-center gap-3 rounded-lg border border-transparent p-2 transition-colors hover:border-slate-200 hover:bg-slate-50">
+                        <SkillIcon className={`h-5 w-5 ${item.color}`} />
+                        <span className="font-medium">{item.name}</span>
+                    </li>
+                  );
+                })}
               </ul>
             </div>
             <div className="space-y-3 rounded-xl border border-slate-200 bg-white/50 p-5 shadow-sm transition-all hover:shadow-md hover:border-teal-200 hover:bg-white/80">
@@ -433,12 +476,15 @@ export default function Home() {
                 Tools
               </p>
               <ul className="mt-2 space-y-2 text-sm text-slate-700">
-                {skills.tools.map((item) => (
-                  <li key={item.name} className="flex items-center gap-3 rounded-lg border border-transparent p-2 transition-colors hover:border-slate-200 hover:bg-slate-50">
-                      <item.icon className={`h-5 w-5 ${item.color}`} />
-                      <span className="font-medium">{item.name}</span>
-                  </li>
-                ))}
+                {skills.tools.map((item) => {
+                  const SkillIcon = item.icon;
+                  return (
+                    <li key={item.name} className="flex items-center gap-3 rounded-lg border border-transparent p-2 transition-colors hover:border-slate-200 hover:bg-slate-50">
+                        <SkillIcon className={`h-5 w-5 ${item.color}`} />
+                        <span className="font-medium">{item.name}</span>
+                    </li>
+                  );
+                })}
               </ul>
             </div>
           </div>
@@ -447,7 +493,7 @@ export default function Home() {
         {/* Projects */}
         <section
           id="projects"
-          className="border-t border-[#E2E8F0] py-10 md:py-12"
+          className="border-t border-[#E2E8F0] py-10 md:py-12 scroll-mt-20"
         >
           <div className="text-center mb-10">
             <h2 className="text-2xl font-bold text-[#0B0F19]">Projects</h2>
@@ -458,10 +504,10 @@ export default function Home() {
                   key={project.title}
                   className="group flex h-full flex-col overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm transition-all duration-200 hover:-translate-y-1 hover:shadow-md hover:border-teal-200"
                 >
-                  {project.image ? (
+                  {project.image_url ? (
                     <div className="relative h-48 w-full overflow-hidden">
                       <Image
-                        src={project.image}
+                        src={project.image_url}
                         alt={`${project.title} preview`}
                         fill
                         className="object-cover object-top"
@@ -539,7 +585,7 @@ export default function Home() {
         {/* Experience & Education */}
         <section
           id="experience"
-          className="border-t border-[#E2E8F0] py-10 md:py-12"
+          className="border-t border-[#E2E8F0] py-10 md:py-12 scroll-mt-20"
         >
           <div className="text-center mb-10">
             <h2 className="text-2xl font-bold text-[#0B0F19]">Experience & Education</h2>
@@ -618,9 +664,9 @@ export default function Home() {
                         </p>
                         <div className="mt-1 flex items-center justify-between text-xs text-slate-500">
                           <span>{cert.year}</span>
-                          {cert.file && (
+                          {cert.file_url && (
                             <a
-                              href={cert.file}
+                              href={cert.file_url}
                               target="_blank"
                               rel="noreferrer"
                               className="font-medium text-[#0F766E] underline-offset-4 hover:underline"
@@ -640,93 +686,25 @@ export default function Home() {
         {/* Contact */}
         <section
           id="contact"
-          className="border-t border-[#E2E8F0] py-10 md:py-12"
+          className="border-t border-[#E2E8F0] py-10 md:py-12 scroll-mt-20"
         >
           <div className="text-center mb-10">
             <h2 className="text-2xl font-bold text-[#0B0F19]">Contact</h2>
           </div>
           <div className="space-y-8 max-w-4xl mx-auto">
-              {/* Contact Form */}
-              <div className="rounded-xl border border-slate-200 bg-white/50 p-6 shadow-sm">
-                <h3 className="text-sm font-semibold text-[#0B0F19] mb-4 flex items-center gap-2">
-                  <svg className="w-5 h-5 text-teal-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                  </svg>
-                  Kirim Pesan Langsung
-                </h3>
-                <form
-                  onSubmit={(e) => {
-                    e.preventDefault();
-                    const formData = new FormData(e.currentTarget);
-                    const name = formData.get('name');
-                    const email = formData.get('email');
-                    const message = formData.get('message');
-                    
-                    const subject = `Portfolio Contact from ${name}`;
-                    const body = `Nama: ${name}%0D%0AEmail: ${email}%0D%0A%0D%0APesan:%0D%0A${message}`;
-                    
-                    window.location.href = `mailto:nizarnurafif644@gmail.com?subject=${encodeURIComponent(subject)}&body=${body}`;
-                  }}
-                  className="space-y-4"
-                >
-                  <div>
-                    <label htmlFor="name" className="block text-xs font-medium text-slate-700 mb-1.5">
-                      Nama Lengkap
-                    </label>
-                    <input
-                      type="text"
-                      id="name"
-                      name="name"
-                      required
-                      className="w-full px-4 py-2.5 text-sm border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-all"
-                      placeholder="Masukkan nama Anda"
-                    />
-                  </div>
-                  
-                  <div>
-                    <label htmlFor="email" className="block text-xs font-medium text-slate-700 mb-1.5">
-                      Email
-                    </label>
-                    <input
-                      type="email"
-                      id="email"
-                      name="email"
-                      required
-                      className="w-full px-4 py-2.5 text-sm border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-all"
-                      placeholder="email@example.com"
-                    />
-                  </div>
-                  
-                  <div>
-                    <label htmlFor="message" className="block text-xs font-medium text-slate-700 mb-1.5">
-                      Pesan
-                    </label>
-                    <textarea
-                      id="message"
-                      name="message"
-                      required
-                      rows={5}
-                      className="w-full px-4 py-2.5 text-sm border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-all resize-none"
-                      placeholder="Tulis pesan Anda di sini..."
-                    ></textarea>
-                  </div>
-                  
-                  <button
-                    type="submit"
-                    className="w-full bg-[#0F766E] text-white px-6 py-3 rounded-lg text-sm font-semibold shadow-lg shadow-teal-700/20 transition-all duration-200 hover:-translate-y-1 hover:bg-[#0c5c56] hover:shadow-teal-700/30"
-                  >
-                    Kirim Pesan via Email
-                  </button>
-                </form>
-              </div>
-
-              {/* Contact Info */}
-
+            {/* Contact Form Component */}
+            <div className="rounded-xl border border-slate-200 bg-white/50 p-6 shadow-sm">
+              <h3 className="text-sm font-semibold text-[#0B0F19] mb-4 flex items-center gap-2">
+                <svg className="w-5 h-5 text-teal-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                </svg>
+                Kirim Pesan Langsung
+              </h3>
+              <ContactForm />
             </div>
+          </div>
         </section>
       </main>
-
-
 
       {/* Footer */}
       <footer className="border-t border-[#E2E8F0] bg-white">
@@ -737,4 +715,3 @@ export default function Home() {
     </div>
   );
 }
-
