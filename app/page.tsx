@@ -145,29 +145,29 @@ const fallbackCertifications: Certification[] = [
 const fallbackSkills = {
   frontend: [
     { name: "JavaScript (ES6+)", icon: SiJavascript, color: "text-yellow-400" },
-    { name: "TypeScript", icon: SiTypescript, color: "text-blue-600" },
+    { name: "TypeScript", icon: SiTypescript, color: "text-blue-500" },
     { name: "React", icon: SiReact, color: "text-cyan-400" },
-    { name: "Next.js", icon: SiNextdotjs, color: "text-slate-900" },
-    { name: "Tailwind CSS", icon: SiTailwindcss, color: "text-cyan-500" },
+    { name: "Next.js", icon: SiNextdotjs, color: "text-white" },
+    { name: "Tailwind CSS", icon: SiTailwindcss, color: "text-cyan-450" },
     { name: "Vue.js", icon: SiVuedotjs, color: "text-emerald-500" },
     { name: "Flutter", icon: SiFlutter, color: "text-sky-400" },
   ],
   backend: [
-    { name: "PHP", icon: SiPhp, color: "text-indigo-500" },
+    { name: "PHP", icon: SiPhp, color: "text-indigo-400" },
     { name: "Laravel", icon: SiLaravel, color: "text-red-500" },
     { name: "Node.js", icon: SiNodedotjs, color: "text-green-500" },
-    { name: "MySQL", icon: SiMysql, color: "text-blue-500" },
-    { name: "PostgreSQL", icon: SiPostgresql, color: "text-sky-600" },
+    { name: "MySQL", icon: SiMysql, color: "text-blue-400" },
+    { name: "PostgreSQL", icon: SiPostgresql, color: "text-sky-500" },
     { name: "Firebase", icon: SiFirebase, color: "text-amber-500" },
   ],
   tools: [
-    { name: "Git", icon: SiGit, color: "text-red-500" },
-    { name: "GitHub", icon: SiGithub, color: "text-slate-900" },
+    { name: "Git", icon: SiGit, color: "text-orange-500" },
+    { name: "GitHub", icon: SiGithub, color: "text-slate-300" },
     { name: "VS Code", icon: VscVscode, color: "text-blue-500" },
     { name: "Postman", icon: SiPostman, color: "text-orange-500" },
-    { name: "Docker", icon: SiDocker, color: "text-sky-500" },
+    { name: "Docker", icon: SiDocker, color: "text-blue-400" },
     { name: "Figma", icon: SiFigma, color: "text-rose-500" },
-    { name: "Vercel", icon: SiVercel, color: "text-slate-900" },
+    { name: "Vercel", icon: SiVercel, color: "text-white" },
   ],
 };
 
@@ -259,44 +259,52 @@ export default async function Home() {
       const backend = getCategorySkills('backend');
       const tools = getCategorySkills('tools');
 
-      // Hanya gunakan data dari database jika salah satu kategori memiliki data
       if (frontend.length > 0 || backend.length > 0 || tools.length > 0) {
         skills = { frontend, backend, tools };
       }
     }
   } catch (error) {
-    console.warn("Koneksi Supabase belum dikonfigurasi atau gagal. Menggunakan data fallback lokal.", error);
+    console.warn("Koneksi Supabase belum aktif atau menggunakan fallback lokal.", error);
   }
 
   return (
-    <div className="min-h-screen bg-slate-50 text-[#111827] relative">
+    <div className="min-h-screen bg-slate-950 text-slate-100 relative overflow-hidden bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(13,148,136,0.12),rgba(255,255,255,0))] font-sans antialiased">
+      
+      {/* Aurora Ambient Background Glows */}
+      <div className="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] bg-teal-500/5 rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute top-[40%] right-[-10%] w-[60%] h-[60%] bg-indigo-500/5 rounded-full blur-[140px] pointer-events-none" />
+      <div className="absolute bottom-[-10%] left-[10%] w-[50%] h-[50%] bg-emerald-500/5 rounded-full blur-[120px] pointer-events-none" />
+
+      {/* Grid Overlay */}
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,#0f172a_1px,transparent_1px),linear-gradient(to_bottom,#0f172a_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] pointer-events-none -z-10" />
+
       {/* Header */}
-      <header className="sticky top-0 z-30 border-b border-[#E2E8F0] bg-white/95 backdrop-blur">
-        <nav className="mx-auto flex max-w-5xl items-center justify-between px-4 py-4 sm:px-6 lg:px-0">
-          <a href="#home" className="flex items-center gap-3">
-            <div className="relative h-14 w-14">
+      <header className="sticky top-0 z-30 border-b border-slate-900/60 bg-slate-950/80 backdrop-blur-md">
+        <nav className="mx-auto flex max-w-5xl items-center justify-between px-6 py-4 lg:px-0">
+          <a href="#home" className="flex items-center gap-3 group">
+            <div className="relative h-12 w-12 rounded-xl border border-slate-800 bg-slate-900 p-1 flex items-center justify-center transition-all duration-300 group-hover:border-teal-500/50">
               <Image
                 src="/nizar-logo.png"
                 alt="Nizar Nur Afif logo"
                 fill
-                className="object-contain"
-                sizes="56px"
+                className="object-contain p-1.5"
+                sizes="48px"
               />
             </div>
             <div className="flex flex-col leading-tight">
-              <span className="text-sm font-semibold text-[#0B0F19]">
+              <span className="text-sm font-semibold text-white tracking-wide transition-colors group-hover:text-teal-400">
                 Nizar Nur Afif
               </span>
-              <span className="text-xs text-slate-500">Fullstack Developer</span>
+              <span className="text-[10px] text-slate-500 font-medium tracking-wider uppercase">Fullstack Developer</span>
             </div>
           </a>
 
-          <div className="hidden items-center gap-6 text-xs font-medium text-slate-600 sm:flex">
+          <div className="hidden items-center gap-1.5 text-xs font-semibold text-slate-400 sm:flex">
             {navItems.map((item) => (
               <a
                 key={item.href}
                 href={item.href}
-                className="rounded-full px-3 py-1.5 transition-colors duration-150 hover:bg-[#F1F5F9] hover:text-[#0B0F19]"
+                className="rounded-lg px-3 py-2 transition-all duration-200 hover:bg-slate-900 hover:text-teal-400"
               >
                 {item.label}
               </a>
@@ -305,120 +313,111 @@ export default async function Home() {
         </nav>
       </header>
 
-      <main className="mx-auto max-w-5xl px-4 pb-16 pt-16 sm:px-6 lg:px-0">
-        {/* Hero */}
+      <main className="mx-auto max-w-5xl px-6 pb-24 pt-12 lg:px-0 relative z-10">
+        
+        {/* Hero Section */}
         <section
           id="home"
-          className="relative flex flex-col gap-10 pb-16 pt-2 md:flex-row md:items-center md:justify-between rounded-2xl scroll-mt-20"
+          className="relative flex flex-col gap-12 pb-20 pt-8 md:flex-row md:items-center md:justify-between scroll-mt-24"
         >
-          <div className="space-y-6 flex-1 relative z-10">
-            <p className="inline-flex items-center rounded-full bg-[#F1F5F9] px-3 py-1 text-xs font-medium text-[#0F766E]">
-              Fullstack Developer
-            </p>
-            <NameAnimation nameText={nameText} />
-            <p className="max-w-xl text-sm leading-relaxed text-slate-600 sm:text-base text-justify">
+          <div className="space-y-6 flex-1">
+            <div className="inline-flex items-center gap-1.5 rounded-full border border-teal-500/20 bg-teal-950/30 px-3 py-1 text-xs font-medium text-teal-400">
+              <span className="w-1.5 h-1.5 rounded-full bg-teal-400 animate-pulse" />
+              <span>Tersedia untuk Pekerjaan</span>
+            </div>
+            
+            <div className="space-y-3">
+              <p className="text-sm font-semibold text-slate-500 uppercase tracking-widest">Selamat Datang</p>
+              <NameAnimation nameText={nameText} />
+            </div>
+
+            <p className="max-w-xl text-sm leading-relaxed text-slate-400 sm:text-base text-justify">
               Saya adalah Fullstack Developer profesional yang berdedikasi untuk menciptakan solusi digital end-to-end yang elegan dan berdampak. Dengan keahlian di frontend dan backend, saya membangun aplikasi web yang tidak hanya responsif dan cepat, tetapi juga scalable, aman, dan memberikan pengalaman pengguna yang intuitif.
             </p>
-            <div className="flex flex-wrap items-center gap-3">
+            <div className="flex flex-wrap items-center gap-4 pt-2">
               <a
                 href="#projects"
-                className="inline-flex items-center justify-center rounded-lg bg-[#0F766E] px-5 py-2.5 text-xs font-semibold text-white shadow-lg shadow-teal-700/20 transition-all duration-200 hover:-translate-y-1 hover:bg-[#0c5c56] hover:shadow-teal-700/30"
+                className="inline-flex items-center justify-center rounded-xl bg-gradient-to-r from-teal-600 to-emerald-600 px-6 py-3 text-xs font-bold text-white shadow-lg shadow-teal-500/10 hover:shadow-teal-500/25 transition-all duration-200 hover:-translate-y-0.5 hover:from-teal-500 hover:to-emerald-500"
               >
-                View Projects
+                Lihat Proyek Saya
               </a>
               <a
                 href="/CV/CV.pdf"
                 download="Nizar_Nur_Afif_CV.pdf"
-                className="inline-flex items-center justify-center rounded-lg border border-[#0B0F19] px-5 py-2.5 text-xs font-medium text-[#0B0F19] transition-colors duration-150 hover:bg-[#0B0F19] hover:text-white"
+                className="inline-flex items-center justify-center rounded-xl border border-slate-800 bg-slate-900/60 px-6 py-3 text-xs font-semibold text-slate-300 hover:bg-slate-900 hover:text-white hover:border-slate-700 transition-all duration-200"
               >
-                Download CV
+                Unduh CV
               </a>
             </div>
           </div>
 
-          <div className="flex flex-col gap-6 items-center md:items-end relative z-10">
-            {/* Profile Photo with Decorative Elements */}
-            <div className="relative group md:mr-4">
-              {/* Gradient Background Orbs */}
-              <div className="absolute -top-8 -left-8 w-32 h-32 bg-gradient-to-br from-teal-400/30 to-emerald-400/30 rounded-full blur-2xl"></div>
-              <div className="absolute -bottom-8 -right-8 w-40 h-40 bg-gradient-to-br from-blue-400/20 to-cyan-400/20 rounded-full blur-2xl"></div>
+          <div className="flex flex-col gap-6 items-center md:items-end">
+            {/* Profile Photo */}
+            <div className="relative group">
+              {/* Photo Glow behind */}
+              <div className="absolute -inset-2 bg-gradient-to-r from-teal-500 to-indigo-500 rounded-2xl blur-xl opacity-20 group-hover:opacity-40 transition-all duration-500"></div>
               
-              {/* Main Photo Container */}
-              <div className="relative">
-                {/* Decorative Border */}
-                <div className="absolute -inset-2 bg-gradient-to-r from-teal-500 via-emerald-500 to-cyan-500 rounded-2xl blur-sm opacity-40 group-hover:opacity-60 transition duration-300"></div>
-                
-                {/* Photo Frame */}
-                <div className="relative w-64 h-80 rounded-2xl overflow-hidden border-4 border-white shadow-2xl bg-gradient-to-br from-slate-100 to-slate-50">
-                  <Image
-                    src="/images/pp.png"
-                    alt="Nizar Nur Afif - Fullstack Developer"
-                    fill
-                    className="object-cover object-top"
-                    sizes="256px"
-                    priority
-                  />
-                </div>
+              {/* Photo Frame */}
+              <div className="relative w-64 h-80 rounded-2xl overflow-hidden border border-slate-800 bg-slate-900 shadow-2xl">
+                <Image
+                  src="/images/pp.png"
+                  alt="Nizar Nur Afif"
+                  fill
+                  className="object-cover object-top filter grayscale hover:grayscale-0 transition-all duration-500"
+                  sizes="256px"
+                  priority
+                />
+              </div>
 
-                {/* Floating Tech Badges */}
-                <div className="absolute -top-3 -left-3 bg-white rounded-lg px-3 py-1.5 shadow-lg border border-teal-100 animate-bounce" style={{animationDuration: '3s'}}>
-                  <span className="text-xs font-bold text-teal-700">⚡ React</span>
-                </div>
-                
-                <div className="absolute -bottom-3 -right-3 bg-white rounded-lg px-3 py-1.5 shadow-lg border border-emerald-100 animate-bounce" style={{animationDuration: '3.5s', animationDelay: '0.5s'}}>
-                  <span className="text-xs font-bold text-emerald-700">🚀 Next.js</span>
-                </div>
-
-                <div className="absolute top-1/4 -right-4 bg-white rounded-lg px-3 py-1.5 shadow-lg border border-blue-100 animate-bounce" style={{animationDuration: '4s', animationDelay: '1s'}}>
-                  <span className="text-xs font-bold text-blue-700">💾 Node.js</span>
-                </div>
-
-                {/* Decorative Geometric Shapes */}
-                <div className="absolute -top-6 right-8 w-12 h-12 border-4 border-teal-300/50 rounded-lg rotate-12 group-hover:rotate-45 transition-transform duration-500"></div>
-                <div className="absolute -bottom-4 left-4 w-8 h-8 bg-gradient-to-br from-emerald-400/40 to-teal-400/40 rounded-full"></div>
+              {/* Float Badges */}
+              <div className="absolute -top-3 -left-3 bg-slate-900 border border-slate-800 rounded-lg px-2.5 py-1.5 shadow-xl select-none animate-bounce" style={{animationDuration: '4s'}}>
+                <span className="text-[10px] font-bold text-teal-400">⚡ React</span>
+              </div>
+              
+              <div className="absolute -bottom-3 -right-3 bg-slate-900 border border-slate-800 rounded-lg px-2.5 py-1.5 shadow-xl select-none animate-bounce" style={{animationDuration: '4.5s', animationDelay: '0.5s'}}>
+                <span className="text-[10px] font-bold text-teal-400">🚀 Next.js</span>
               </div>
             </div>
 
             {/* Quick Profile Card */}
-            <div className="w-full max-w-xs rounded-lg bg-[#F1F5F9] p-4 shadow-sm">
-              <p className="text-xs font-semibold uppercase tracking-[0.16em] text-slate-500">
-                Quick profile
+            <div className="w-full max-w-xs rounded-xl border border-slate-900 bg-slate-900/40 p-5 shadow-xl backdrop-blur-sm">
+              <p className="text-[10px] font-bold uppercase tracking-widest text-slate-500">
+                Profil Ringkas
               </p>
-              <dl className="mt-3 space-y-2 text-xs text-slate-700">
+              <dl className="mt-4 space-y-2.5 text-xs">
                 <div className="flex justify-between gap-4">
-                  <dt className="text-slate-500">Role</dt>
-                  <dd className="font-medium text-[#111827]">Fullstack Developer</dd>
+                  <dt className="text-slate-500">Fokus</dt>
+                  <dd className="font-semibold text-slate-300">Frontend & Backend</dd>
                 </div>
                 <div className="flex justify-between gap-4">
-                  <dt className="text-slate-500">Focus</dt>
-                  <dd className="font-medium text-[#111827]">
-                    Frontend · Backend · Database
-                  </dd>
+                  <dt className="text-slate-500">Spesialisasi</dt>
+                  <dd className="font-semibold text-slate-300 text-right">React · Next.js · Laravel</dd>
                 </div>
                 <div className="flex justify-between gap-4">
-                  <dt className="text-slate-500">Availability</dt>
-                  <dd className="font-medium text-[#111827]">
-                    Open for opportunities
-                  </dd>
+                  <dt className="text-slate-500">Ketersediaan</dt>
+                  <dd className="font-semibold text-emerald-400">Bekerja Lepas / Fulltime</dd>
                 </div>
               </dl>
             </div>
           </div>
         </section>
 
-        {/* About */}
+        {/* About Section */}
         <section
           id="about"
-          className="border-t border-[#E2E8F0] py-10 md:py-12 scroll-mt-20"
+          className="border-t border-slate-900/80 py-16 md:py-20 scroll-mt-24"
         >
-          <div className="text-center mb-8">
-            <h2 className="text-2xl font-bold text-[#0B0F19]">About Me</h2>
+          <div className="text-center mb-12">
+            <h2 className="text-2xl font-extrabold tracking-tight text-white sm:text-3xl bg-gradient-to-r from-white via-slate-300 to-slate-500 bg-clip-text text-transparent">
+              Tentang Saya
+            </h2>
+            <div className="h-1 w-12 bg-teal-500 mx-auto mt-3 rounded-full" />
           </div>
-          <div className="space-y-4 text-sm leading-relaxed text-slate-600 sm:text-base max-w-4xl mx-auto">
+          <div className="space-y-6 text-sm leading-relaxed text-slate-400 sm:text-base max-w-3xl mx-auto">
             <p className="text-justify">
               Saya seorang fullstack developer yang berpengalaman membangun aplikasi web
               dari frontend hingga backend. Terbiasa bekerja dengan stack JavaScript/TypeScript modern
-              (React, Next.js) untuk frontend, dan Node.js dengan Express untuk backend,
+              (React, Next.js) untuk frontend, dan Node.js dengan Express serta Laravel untuk backend,
               serta database relational (PostgreSQL, MySQL) maupun NoSQL (MongoDB).
             </p>
             <p className="text-justify">
@@ -430,58 +429,67 @@ export default async function Home() {
           </div>
         </section>
 
-        {/* Skills */}
+        {/* Skills Section */}
         <section
           id="skills"
-          className="border-t border-[#E2E8F0] py-10 md:py-12 scroll-mt-20"
+          className="border-t border-slate-900/80 py-16 md:py-20 scroll-mt-24"
         >
-          <div className="text-center mb-10">
-            <h2 className="text-2xl font-bold text-[#0B0F19]">Skills</h2>
+          <div className="text-center mb-12">
+            <h2 className="text-2xl font-extrabold tracking-tight text-white sm:text-3xl bg-gradient-to-r from-white via-slate-300 to-slate-500 bg-clip-text text-transparent">
+              Keahlian Teknologi
+            </h2>
+            <div className="h-1 w-12 bg-teal-500 mx-auto mt-3 rounded-full" />
           </div>
+          
           <div className="grid gap-6 sm:grid-cols-3">
-            <div className="space-y-3 rounded-xl border border-slate-200 bg-white/50 p-5 shadow-sm transition-all hover:shadow-md hover:border-teal-200 hover:bg-white/80">
-              <p className="text-xs font-bold uppercase tracking-[0.16em] text-teal-700">
-                Frontend
+            {/* Frontend */}
+            <div className="space-y-4 rounded-2xl border border-slate-900 bg-slate-900/20 p-6 transition-all duration-300 hover:border-teal-500/35 hover:shadow-[0_0_25px_rgba(13,148,136,0.06)] hover:-translate-y-0.5">
+              <p className="text-[10px] font-bold uppercase tracking-widest text-teal-400">
+                Frontend Development
               </p>
-              <ul className="mt-2 space-y-2 text-sm text-slate-700">
+              <ul className="mt-2 space-y-1.5 text-xs text-slate-300">
                 {skills.frontend.map((item) => {
                   const SkillIcon = item.icon;
                   return (
-                    <li key={item.name} className="flex items-center gap-3 rounded-lg border border-transparent p-2 transition-colors hover:border-slate-200 hover:bg-slate-50">
+                    <li key={item.name} className="flex items-center gap-3 rounded-lg border border-transparent p-2 transition-all duration-200 hover:border-slate-800/40 hover:bg-slate-900/30">
                         <SkillIcon className={`h-5 w-5 ${item.color}`} />
-                        <span className="font-medium">{item.name}</span>
+                        <span className="font-semibold">{item.name}</span>
                     </li>
                   );
                 })}
               </ul>
             </div>
-            <div className="space-y-3 rounded-xl border border-slate-200 bg-white/50 p-5 shadow-sm transition-all hover:shadow-md hover:border-teal-200 hover:bg-white/80">
-              <p className="text-xs font-bold uppercase tracking-[0.16em] text-teal-700">
-                Backend
+            
+            {/* Backend */}
+            <div className="space-y-4 rounded-2xl border border-slate-900 bg-slate-900/20 p-6 transition-all duration-300 hover:border-teal-500/35 hover:shadow-[0_0_25px_rgba(13,148,136,0.06)] hover:-translate-y-0.5">
+              <p className="text-[10px] font-bold uppercase tracking-widest text-teal-400">
+                Backend Development
               </p>
-              <ul className="mt-2 space-y-2 text-sm text-slate-700">
+              <ul className="mt-2 space-y-1.5 text-xs text-slate-300">
                 {skills.backend.map((item) => {
                   const SkillIcon = item.icon;
                   return (
-                    <li key={item.name} className="flex items-center gap-3 rounded-lg border border-transparent p-2 transition-colors hover:border-slate-200 hover:bg-slate-50">
+                    <li key={item.name} className="flex items-center gap-3 rounded-lg border border-transparent p-2 transition-all duration-200 hover:border-slate-800/40 hover:bg-slate-900/30">
                         <SkillIcon className={`h-5 w-5 ${item.color}`} />
-                        <span className="font-medium">{item.name}</span>
+                        <span className="font-semibold">{item.name}</span>
                     </li>
                   );
                 })}
               </ul>
             </div>
-            <div className="space-y-3 rounded-xl border border-slate-200 bg-white/50 p-5 shadow-sm transition-all hover:shadow-md hover:border-teal-200 hover:bg-white/80">
-              <p className="text-xs font-bold uppercase tracking-[0.16em] text-teal-700">
-                Tools
+            
+            {/* Tools */}
+            <div className="space-y-4 rounded-2xl border border-slate-900 bg-slate-900/20 p-6 transition-all duration-300 hover:border-teal-500/35 hover:shadow-[0_0_25px_rgba(13,148,136,0.06)] hover:-translate-y-0.5">
+              <p className="text-[10px] font-bold uppercase tracking-widest text-teal-400">
+                Development Tools
               </p>
-              <ul className="mt-2 space-y-2 text-sm text-slate-700">
+              <ul className="mt-2 space-y-1.5 text-xs text-slate-300">
                 {skills.tools.map((item) => {
                   const SkillIcon = item.icon;
                   return (
-                    <li key={item.name} className="flex items-center gap-3 rounded-lg border border-transparent p-2 transition-colors hover:border-slate-200 hover:bg-slate-50">
+                    <li key={item.name} className="flex items-center gap-3 rounded-lg border border-transparent p-2 transition-all duration-200 hover:border-slate-800/40 hover:bg-slate-900/30">
                         <SkillIcon className={`h-5 w-5 ${item.color}`} />
-                        <span className="font-medium">{item.name}</span>
+                        <span className="font-semibold">{item.name}</span>
                     </li>
                   );
                 })}
@@ -490,89 +498,91 @@ export default async function Home() {
           </div>
         </section>
 
-        {/* Projects */}
+        {/* Projects Section */}
         <section
           id="projects"
-          className="border-t border-[#E2E8F0] py-10 md:py-12 scroll-mt-20"
+          className="border-t border-slate-900/80 py-16 md:py-20 scroll-mt-24"
         >
-          <div className="text-center mb-10">
-            <h2 className="text-2xl font-bold text-[#0B0F19]">Projects</h2>
+          <div className="text-center mb-12">
+            <h2 className="text-2xl font-extrabold tracking-tight text-white sm:text-3xl bg-gradient-to-r from-white via-slate-300 to-slate-500 bg-clip-text text-transparent">
+              Proyek Portofolio
+            </h2>
+            <div className="h-1 w-12 bg-teal-500 mx-auto mt-3 rounded-full" />
           </div>
-          <div className="grid gap-6 md:grid-cols-2">
+          
+          <div className="grid gap-8 md:grid-cols-2">
               {projects.map((project) => (
                 <article
                   key={project.title}
-                  className="group flex h-full flex-col overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm transition-all duration-200 hover:-translate-y-1 hover:shadow-md hover:border-teal-200"
+                  className="group flex flex-col overflow-hidden rounded-2xl border border-slate-900 bg-slate-900/30 transition-all duration-300 hover:border-teal-500/35 hover:shadow-[0_0_30px_rgba(13,148,136,0.09)]"
                 >
                   {project.image_url ? (
-                    <div className="relative h-48 w-full overflow-hidden">
+                    <div className="relative h-52 w-full overflow-hidden border-b border-slate-900/80">
                       <Image
                         src={project.image_url}
                         alt={`${project.title} preview`}
                         fill
-                        className="object-cover object-top"
+                        className="object-cover object-top transition-transform duration-500 group-hover:scale-105"
                         sizes="(max-width: 768px) 100vw, 50vw"
                       />
                     </div>
                   ) : (
-                    <div className="h-32 bg-gradient-to-br from-slate-100 to-slate-200 text-xs text-slate-400 flex items-center justify-center font-medium">
+                    <div className="h-40 bg-slate-900 text-xs text-slate-500 flex items-center justify-center font-medium">
                       Project preview area
                     </div>
                   )}
-                  <div className="flex flex-1 flex-col p-4">
+                  
+                  <div className="flex flex-1 flex-col p-6 space-y-4">
                     <div className="flex items-baseline justify-between gap-2">
-                      <h3 className="text-sm font-semibold text-[#0B0F19]">
+                      <h3 className="text-base font-bold text-white tracking-wide group-hover:text-teal-400 transition-colors">
                         {project.title}
                       </h3>
-                      <p className="text-[11px] text-slate-500">{project.role}</p>
+                      <p className="text-[10px] font-semibold text-slate-500 tracking-wider uppercase">{project.role}</p>
                     </div>
-                    <div className="mt-3 space-y-2 text-xs text-slate-700">
+
+                    <div className="space-y-3 text-xs text-slate-400">
                       <div>
-                        <p className="font-semibold text-[11px] text-slate-500">
-                          Problem
-                        </p>
-                        <p className="mt-1 text-[13px] text-justify">{project.problem}</p>
+                        <span className="text-[10px] font-bold text-slate-500 uppercase tracking-wider block">Masalah</span>
+                        <p className="mt-1 leading-relaxed text-justify">{project.problem}</p>
                       </div>
                       <div>
-                        <p className="font-semibold text-[11px] text-slate-500">
-                          Approach
-                        </p>
-                        <p className="mt-1 text-[13px] text-justify">{project.solution}</p>
+                        <span className="text-[10px] font-bold text-slate-500 uppercase tracking-wider block">Pendekatan</span>
+                        <p className="mt-1 leading-relaxed text-justify">{project.solution}</p>
                       </div>
                       <div>
-                        <p className="font-semibold text-[11px] text-slate-500">
-                          Result / Features
-                        </p>
-                        <p className="mt-1 text-[13px] text-justify">{project.result}</p>
+                        <span className="text-[10px] font-bold text-slate-500 uppercase tracking-wider block">Hasil / Fitur Utama</span>
+                        <p className="mt-1 leading-relaxed text-justify">{project.result}</p>
                       </div>
                     </div>
-                    <div className="mt-3 flex flex-wrap gap-1 text-[11px] text-slate-500">
+
+                    <div className="pt-2 flex flex-wrap gap-1.5">
                       {project.tech.map((tech) => (
                         <span
                           key={tech}
-                          className="rounded-full bg-[#F1F5F9] px-2 py-0.5"
+                          className="rounded bg-slate-900 border border-slate-800 px-2 py-0.5 text-[10px] text-slate-300 font-medium"
                         >
                           {tech}
                         </span>
                       ))}
                     </div>
-                    <div className="mt-4 flex gap-3 text-xs font-medium">
+
+                    <div className="pt-3 flex gap-4 text-xs font-semibold">
                       <a
                         href={project.github}
                         target="_blank"
                         rel="noreferrer"
-                        className="text-[#0F766E] underline-offset-4 hover:underline"
+                        className="text-teal-400 hover:text-teal-300 transition-colors inline-flex items-center gap-1"
                       >
-                        GitHub
+                        GitHub &rarr;
                       </a>
                       {project.demo && (
                         <a
                           href={project.demo}
                           target="_blank"
                           rel="noreferrer"
-                          className="text-[#0B0F19] underline-offset-4 hover:underline"
+                          className="text-slate-300 hover:text-white transition-colors inline-flex items-center gap-1"
                         >
-                          Live Demo
+                          Live Demo &rarr;
                         </a>
                       )}
                     </div>
@@ -585,93 +595,107 @@ export default async function Home() {
         {/* Experience & Education */}
         <section
           id="experience"
-          className="border-t border-[#E2E8F0] py-10 md:py-12 scroll-mt-20"
+          className="border-t border-slate-900/80 py-16 md:py-20 scroll-mt-24"
         >
-          <div className="text-center mb-10">
-            <h2 className="text-2xl font-bold text-[#0B0F19]">Experience & Education</h2>
+          <div className="text-center mb-12">
+            <h2 className="text-2xl font-extrabold tracking-tight text-white sm:text-3xl bg-gradient-to-r from-white via-slate-300 to-slate-500 bg-clip-text text-transparent">
+              Pengalaman & Pendidikan
+            </h2>
+            <div className="h-1 w-12 bg-teal-500 mx-auto mt-3 rounded-full" />
           </div>
-          <div className="space-y-8 max-w-4xl mx-auto">
-              <div className="space-y-4">
-                <p className="text-xs font-semibold uppercase tracking-[0.16em] text-slate-600">
-                  Experience
+
+          <div className="space-y-12 max-w-3xl mx-auto">
+              {/* Experience Timeline */}
+              <div className="space-y-6">
+                <p className="text-xs font-bold uppercase tracking-widest text-slate-500 border-l-2 border-teal-500 pl-3">
+                  Riwayat Pekerjaan
                 </p>
-                <div className="space-y-4">
+                <div className="relative border-l border-slate-800 ml-3 space-y-6 py-2">
                   {experiences.map((exp) => (
                     <div
                       key={exp.role + exp.company}
-                      className="rounded-xl border border-slate-200 bg-white/50 p-5 shadow-sm transition-all duration-200 hover:shadow-md hover:border-teal-100 hover:-translate-y-0.5"
+                      className="relative pl-6 group"
                     >
-                      <div className="flex flex-col gap-1 md:flex-row md:items-baseline md:justify-between">
-                        <div>
-                          <h3 className="text-sm font-semibold text-[#0B0F19]">
-                            {exp.role}
-                          </h3>
-                          <p className="text-xs font-medium text-slate-600">
-                            {exp.company}
-                          </p>
+                      {/* Timeline Dot */}
+                      <span className="absolute -left-[5px] top-1.5 h-2 w-2 rounded-full bg-teal-500 ring-4 ring-slate-950 group-hover:scale-125 transition-transform duration-200" />
+                      
+                      <div className="rounded-xl border border-slate-900 bg-slate-900/20 p-5 transition-all duration-300 hover:border-teal-500/25 hover:shadow-[0_0_20px_rgba(13,148,136,0.04)]">
+                        <div className="flex flex-col gap-1.5 sm:flex-row sm:items-baseline sm:justify-between">
+                          <div>
+                            <h3 className="text-sm font-bold text-white">
+                              {exp.role}
+                            </h3>
+                            <p className="text-xs font-medium text-teal-400 mt-0.5">
+                              {exp.company}
+                            </p>
+                          </div>
+                          <span className="text-[10px] font-semibold text-slate-500 bg-slate-900 border border-slate-800 px-2 py-0.5 rounded-full">
+                            {exp.period}
+                          </span>
                         </div>
-                        <span className="text-xs text-slate-500">
-                          {exp.period}
-                        </span>
+                        <p className="mt-3 text-xs leading-relaxed text-slate-400 text-justify">
+                          {exp.description}
+                        </p>
                       </div>
-                      <p className="mt-2 text-sm text-slate-600 text-justify">
-                        {exp.description}
-                      </p>
                     </div>
                   ))}
                 </div>
               </div>
 
-              <div className="grid gap-6 md:grid-cols-2">
-                <div className="space-y-3">
-                  <p className="text-xs font-semibold uppercase tracking-[0.16em] text-slate-600">
-                    Education
+              {/* Education & Certifications */}
+              <div className="grid gap-6 md:grid-cols-2 pt-4">
+                {/* Education */}
+                <div className="space-y-4">
+                  <p className="text-xs font-bold uppercase tracking-widest text-slate-500 border-l-2 border-teal-500 pl-3">
+                    Pendidikan
                   </p>
-                  <div className="space-y-3">
+                  <div className="space-y-4">
                     {educationList.map((edu) => (
                       <div
                         key={edu.degree + edu.institution}
-                        className="rounded-xl border border-slate-200 bg-white/50 p-5 shadow-sm transition-all duration-200 hover:shadow-md hover:border-teal-100"
+                        className="rounded-xl border border-slate-900 bg-slate-900/20 p-5 transition-all duration-300 hover:border-teal-500/20"
                       >
-                        <h3 className="text-sm font-semibold text-[#0B0F19]">
+                        <h3 className="text-sm font-bold text-white">
                           {edu.degree}
                         </h3>
-                        <p className="mt-1 text-xs font-medium text-slate-600">
+                        <p className="mt-1 text-xs font-medium text-slate-400">
                           {edu.institution}
                         </p>
-                        <p className="mt-1 text-xs text-slate-500">
+                        <p className="mt-2 text-[10px] font-semibold text-slate-500">
                           {edu.period}
                         </p>
                       </div>
                     ))}
                   </div>
                 </div>
-                <div className="space-y-3">
-                  <p className="text-xs font-semibold uppercase tracking-[0.16em] text-slate-600">
-                    Certifications
+
+                {/* Certifications */}
+                <div className="space-y-4">
+                  <p className="text-xs font-bold uppercase tracking-widest text-slate-500 border-l-2 border-teal-500 pl-3">
+                    Sertifikasi
                   </p>
-                  <div className="space-y-3">
+                  <div className="space-y-4">
                     {certifications.map((cert) => (
                       <div
                         key={cert.name + cert.issuer}
-                        className="rounded-xl border border-slate-200 bg-white/50 p-5 shadow-sm transition-all duration-200 hover:shadow-md hover:border-teal-100"
+                        className="rounded-xl border border-slate-900 bg-slate-900/20 p-5 transition-all duration-300 hover:border-teal-500/20"
                       >
-                        <h3 className="text-sm font-semibold text-[#0B0F19]">
+                        <h3 className="text-sm font-bold text-white leading-snug">
                           {cert.name}
                         </h3>
-                        <p className="mt-1 text-xs font-medium text-slate-600">
+                        <p className="mt-1 text-xs font-medium text-slate-400">
                           {cert.issuer}
                         </p>
-                        <div className="mt-1 flex items-center justify-between text-xs text-slate-500">
-                          <span>{cert.year}</span>
+                        <div className="mt-3 flex items-center justify-between text-[10px]">
+                          <span className="font-semibold text-slate-500">{cert.year}</span>
                           {cert.file_url && (
                             <a
                               href={cert.file_url}
                               target="_blank"
                               rel="noreferrer"
-                              className="font-medium text-[#0F766E] underline-offset-4 hover:underline"
+                              className="font-bold text-teal-400 hover:text-teal-300 transition-colors inline-flex items-center gap-0.5"
                             >
-                              View Certificate
+                              Lihat Sertifikat &rarr;
                             </a>
                           )}
                         </div>
@@ -683,22 +707,25 @@ export default async function Home() {
             </div>
         </section>
 
-        {/* Contact */}
+        {/* Contact Section */}
         <section
           id="contact"
-          className="border-t border-[#E2E8F0] py-10 md:py-12 scroll-mt-20"
+          className="border-t border-slate-900/80 py-16 md:py-20 scroll-mt-24"
         >
-          <div className="text-center mb-10">
-            <h2 className="text-2xl font-bold text-[#0B0F19]">Contact</h2>
+          <div className="text-center mb-12">
+            <h2 className="text-2xl font-extrabold tracking-tight text-white sm:text-3xl bg-gradient-to-r from-white via-slate-300 to-slate-500 bg-clip-text text-transparent">
+              Hubungi Saya
+            </h2>
+            <div className="h-1 w-12 bg-teal-500 mx-auto mt-3 rounded-full" />
           </div>
-          <div className="space-y-8 max-w-4xl mx-auto">
-            {/* Contact Form Component */}
-            <div className="rounded-xl border border-slate-200 bg-white/50 p-6 shadow-sm">
-              <h3 className="text-sm font-semibold text-[#0B0F19] mb-4 flex items-center gap-2">
-                <svg className="w-5 h-5 text-teal-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          
+          <div className="max-w-2xl mx-auto">
+            <div className="rounded-2xl border border-slate-900 bg-slate-900/30 p-6 md:p-8 shadow-xl backdrop-blur-sm">
+              <h3 className="text-sm font-bold text-white mb-6 flex items-center gap-2">
+                <svg className="w-5 h-5 text-teal-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                 </svg>
-                Kirim Pesan Langsung
+                <span>Kirim Pesan Langsung</span>
               </h3>
               <ContactForm />
             </div>
@@ -707,8 +734,8 @@ export default async function Home() {
       </main>
 
       {/* Footer */}
-      <footer className="border-t border-[#E2E8F0] bg-white">
-        <div className="mx-auto flex max-w-5xl flex-col items-center justify-center gap-2 px-4 py-4 text-[11px] text-slate-500 sm:px-6 lg:px-0">
+      <footer className="border-t border-slate-900 bg-slate-950/60 py-8 relative z-10">
+        <div className="mx-auto flex max-w-5xl flex-col items-center justify-center gap-2 px-6 text-[10px] font-semibold text-slate-500 tracking-wider uppercase sm:px-6 lg:px-0">
           <span>© {year} Nizar Nur Afif. All rights reserved.</span>
         </div>
       </footer>

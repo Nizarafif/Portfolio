@@ -19,7 +19,7 @@ export default function ContactForm() {
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
       <div>
-        <label htmlFor="name" className="block text-xs font-medium text-slate-700 mb-1.5">
+        <label htmlFor="name" className="block text-xs font-semibold text-slate-400 mb-1.5 uppercase tracking-wider">
           Nama Lengkap
         </label>
         <input
@@ -27,13 +27,13 @@ export default function ContactForm() {
           id="name"
           name="name"
           required
-          className="w-full px-4 py-2.5 text-sm border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-all"
+          className="w-full px-4 py-2.5 text-sm bg-slate-900 border border-slate-800 rounded-lg text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-teal-500/30 focus:border-teal-500/40 transition-all"
           placeholder="Masukkan nama Anda"
         />
       </div>
       
       <div>
-        <label htmlFor="email" className="block text-xs font-medium text-slate-700 mb-1.5">
+        <label htmlFor="email" className="block text-xs font-semibold text-slate-400 mb-1.5 uppercase tracking-wider">
           Email
         </label>
         <input
@@ -41,13 +41,13 @@ export default function ContactForm() {
           id="email"
           name="email"
           required
-          className="w-full px-4 py-2.5 text-sm border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-all"
+          className="w-full px-4 py-2.5 text-sm bg-slate-900 border border-slate-800 rounded-lg text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-teal-500/30 focus:border-teal-500/40 transition-all"
           placeholder="email@example.com"
         />
       </div>
       
       <div>
-        <label htmlFor="message" className="block text-xs font-medium text-slate-700 mb-1.5">
+        <label htmlFor="message" className="block text-xs font-semibold text-slate-400 mb-1.5 uppercase tracking-wider">
           Pesan
         </label>
         <textarea
@@ -55,14 +55,14 @@ export default function ContactForm() {
           name="message"
           required
           rows={5}
-          className="w-full px-4 py-2.5 text-sm border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-all resize-none"
+          className="w-full px-4 py-2.5 text-sm bg-slate-900 border border-slate-800 rounded-lg text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-teal-500/30 focus:border-teal-500/40 transition-all resize-none"
           placeholder="Tulis pesan Anda di sini..."
         ></textarea>
       </div>
       
       <button
         type="submit"
-        className="w-full bg-[#0F766E] text-white px-6 py-3 rounded-lg text-sm font-semibold shadow-lg shadow-teal-700/20 transition-all duration-200 hover:-translate-y-1 hover:bg-[#0c5c56] hover:shadow-teal-700/30"
+        className="w-full py-3 px-4 border border-transparent rounded-lg text-sm font-semibold text-white bg-gradient-to-r from-teal-600 to-emerald-600 shadow-lg shadow-teal-500/10 hover:from-teal-500 hover:to-emerald-500 hover:shadow-teal-500/20 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-slate-950 focus:ring-teal-500 transition-all duration-200 hover:-translate-y-0.5"
       >
         Kirim Pesan via Email
       </button>

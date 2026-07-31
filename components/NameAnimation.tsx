@@ -42,11 +42,11 @@ export default function NameAnimation({ nameText }: NameAnimationProps) {
 
   return (
     <h1
-      className={`text-3xl font-bold tracking-tight text-[#0B0F19] sm:text-4xl md:text-[2.6rem] md:leading-tight transition duration-150 drop-shadow-sm ${
+      className={`text-3xl font-extrabold tracking-tight sm:text-5xl md:text-6xl md:leading-tight transition duration-150 ${
         isAnimatingName ? "blur-[1px]" : ""
       }`}
     >
-      <span className="bg-gradient-to-r from-[#0B0F19] to-slate-600 bg-clip-text text-transparent">
+      <span className="bg-gradient-to-r from-teal-400 via-emerald-400 to-cyan-400 bg-clip-text text-transparent">
         {displayName}
       </span>
     </h1>
