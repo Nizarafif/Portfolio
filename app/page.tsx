@@ -3,6 +3,7 @@ import { createClient } from "@/utils/supabase/server";
 import { getIcon } from "@/components/icons-map";
 import NameAnimation from "@/components/NameAnimation";
 import ContactForm from "@/components/ContactForm";
+import SmoothScroll from "@/components/SmoothScroll";
 import { 
   SiJavascript, SiTypescript, SiReact, SiNextdotjs, SiTailwindcss,
   SiNodedotjs, SiMysql, SiPhp, SiLaravel,
@@ -10,6 +11,8 @@ import {
   SiDocker, SiFigma, SiVercel
 } from "react-icons/si";
 import { VscVscode } from "react-icons/vsc";
+
+export const dynamic = 'force-dynamic';
 
 const navItems = [
   { href: "#home", label: "Home" },
@@ -269,6 +272,7 @@ export default async function Home() {
 
   return (
     <div className="min-h-screen bg-slate-950 text-slate-100 relative overflow-hidden bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(13,148,136,0.12),rgba(255,255,255,0))] font-sans antialiased">
+      <SmoothScroll />
       
       {/* Aurora Ambient Background Glows */}
       <div className="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] bg-teal-500/5 rounded-full blur-[120px] pointer-events-none" />
