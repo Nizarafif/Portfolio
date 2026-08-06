@@ -11,6 +11,8 @@ import GitHubActivity from "@/components/GitHubActivity";
 import BackToTop from "@/components/BackToTop";
 import LottiePlayer from "@/components/LottiePlayer";
 import TimeStatus from "@/components/TimeStatus";
+import MobileMenu from "@/components/MobileMenu";
+
 
 import { 
   ArrowUpRight, 
@@ -393,6 +395,8 @@ export default async function Home() {
               </a>
             ))}
           </div>
+
+          <MobileMenu navItems={navItems} />
         </nav>
       </header>
  
