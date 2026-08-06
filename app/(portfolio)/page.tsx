@@ -962,7 +962,7 @@ export default async function Home() {
               </div>
             </div>
             
-            <div className="md:col-span-2">
+            <div className="md:col-span-2 min-w-0">
               <GitHubActivity />
             </div>
           </div>
