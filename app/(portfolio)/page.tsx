@@ -1049,13 +1049,13 @@ export default async function Home() {
                   <span>github.com/Nizarafif</span>
                 </a>
                 <a 
-                  href="https://wa.me/6282242131665" 
+                  href="https://wa.me/6281806344925" 
                   target="_blank" 
                   rel="noopener noreferrer"
                   className="flex items-center gap-3 p-3 rounded-xl border border-slate-200/60 bg-white shadow-sm hover:border-teal-500/20 hover:shadow-md transition-all text-xs font-semibold text-slate-700"
                 >
                   <Phone className="h-4.5 w-4.5 text-teal-650 shrink-0" />
-                  <span>+62 822-4213-1665</span>
+                  <span>+62 818-0634-4925</span>
                 </a>
                 <div className="flex items-center gap-3 p-3 rounded-xl border border-slate-200/60 bg-white shadow-sm text-xs font-semibold text-slate-700">
                   <MapPin className="h-4.5 w-4.5 text-teal-650 shrink-0" />
