@@ -12,6 +12,7 @@ import BackToTop from "@/components/BackToTop";
 import LottiePlayer from "@/components/LottiePlayer";
 import TimeStatus from "@/components/TimeStatus";
 import MobileMenu from "@/components/MobileMenu";
+import SystemPulse from "@/components/SystemPulse";
 
 
 import { 
@@ -493,6 +494,7 @@ export default async function Home() {
                 </dl>
               </div>
             </div>
+            <SystemPulse />
           </div>
         </section>
  
