@@ -13,6 +13,7 @@ import LottiePlayer from "@/components/LottiePlayer";
 import TimeStatus from "@/components/TimeStatus";
 import MobileMenu from "@/components/MobileMenu";
 import SystemPulse from "@/components/SystemPulse";
+import CaseStudyLink from "@/components/CaseStudyLink";
 
 
 import { 
@@ -41,14 +42,19 @@ import {
   Smartphone,
   Wrench,
   BookOpen,
-  User
+  User,
+  Bot,
+  Sparkles,
+  Network,
+  Workflow
 } from "lucide-react";
 
 import { 
   SiJavascript, SiTypescript, SiReact, SiNextdotjs, SiTailwindcss,
   SiNodedotjs, SiMysql, SiPhp, SiLaravel,
   SiGit, SiGithub as Github, SiPostman, SiVuedotjs, SiPostgresql, SiFlutter, SiFirebase,
-  SiDocker, SiFigma, SiVercel, SiDart, SiHtml5, SiCss3, SiLinkedin as Linkedin
+  SiDocker, SiFigma, SiVercel, SiDart, SiHtml5, SiCss3, SiLinkedin as Linkedin,
+  SiOpenai, SiSupabase, SiNetlify, SiRedis
 } from "react-icons/si";
 import { VscVscode } from "react-icons/vsc";
 
@@ -103,15 +109,37 @@ type Certification = {
 // Fallback Static Data
 const fallbackProjects: Project[] = [
   {
-    title: "E-Commerce App",
-    role: "Fullstack Developer",
-    problem: "Building a modern, responsive, fast, and seamless e-commerce platform for product management and shopping cart experience.",
-    solution: "Developing the e-commerce application using React, TypeScript, and Tailwind CSS with modular architecture, shopping cart state management, and user authentication.",
-    result: "Delivered a high-performance e-commerce application with a clean, responsive user interface and intuitive shopping workflow.",
-    tech: ["React", "TypeScript", "Tailwind CSS"],
-    github: "https://github.com/Nizarafif/e-commerce",
-    demo: "https://e-commerce-six-omega-11.vercel.app/",
-    image_url: "/images/e-commerce.png",
+    title: "Resumora",
+    role: "Fullstack / Frontend Engineer",
+    problem: "Pembuatan CV/Resume profesional yang lolos uji ATS seringkali rumit, memakan waktu, dan minim optimasi formulasi kata kunci relevan.",
+    solution: "Membangun platform AI Resume Builder modern dengan live dynamic preview editor, ATS Match Score calculator, asisten penulisan AI, multi-template responsif, serta ekspor PDF instan.",
+    result: "Menghadirkan aplikasi resume builder bertenaga AI dengan kompatibilitas ATS 98%+, live preview instan, dan integrasi cloud storage.",
+    tech: ["React 19", "TypeScript", "Tailwind CSS", "Vite", "Framer Motion", "Zustand", "Zod", "Supabase"],
+    github: "https://github.com/Nizarafif/resumora",
+    demo: "https://resumoraa.netlify.app/",
+    image_url: "/images/resumora.png",
+  },
+  {
+    title: "NexaOps",
+    role: "Fullstack Developer & Architect",
+    problem: "Sistem pemantauan dan pengelolaan seluruh siklus aset IT perusahaan (hardware, software, lisensi, jaringan) secara real-time dengan jejak audit mutasi, barcode scanner, dan kalkulasi depresiasi.",
+    solution: "Membangun platform IT Asset Monitoring & Management berbasis Clean Architecture menggunakan Laravel 13 REST API, React 18, TypeScript, Tailwind CSS, TanStack Query, Framer Motion, dan Recharts.",
+    result: "Menghadirkan dashboard monitoring aset real-time, kalkulasi depresiasi otomatis, alert masa garansi, dan cetak label QR code fisik.",
+    tech: ["Laravel 13", "React", "TypeScript", "Tailwind CSS", "Vite", "Framer Motion", "Recharts"],
+    github: "https://github.com/Nizarafif/nexaops",
+    demo: "https://nexaops.vercel.app/",
+    image_url: "/images/nexaops.png",
+  },
+  {
+    title: "NexaPort",
+    role: "Fullstack Developer & Lead",
+    problem: "Kebutuhan platform enterprise manajemen depo logistik kontainer terpadu untuk pelacakan peti kemas real-time, visualisasi denah yard 2D/3D, dan gate automation.",
+    solution: "Mengembangkan Intelligent Container Logistics & Depot Platform menggunakan Laravel REST API (PostgreSQL immutable ledger) dan React TypeScript frontend dengan visualizer yard interaktif.",
+    result: "Meningkatkan efisiensi pelacakan kontainer dan monitoring operasional depo dengan visualisasi denah yard dan ledger pergerakan kontainer.",
+    tech: ["Laravel", "React", "TypeScript", "Tailwind CSS", "Vite", "PostgreSQL", "Lucide React"],
+    github: "https://github.com/Nizarafif/nexaport",
+    demo: "https://nexaport.vercel.app/",
+    image_url: "/images/nexaport.png",
   },
   {
     title: "FlowSync",
@@ -123,6 +151,17 @@ const fallbackProjects: Project[] = [
     github: "https://github.com/Nizarafif/FlowSync",
     demo: "https://flow-sync-one.vercel.app/",
     image_url: "/images/Flowsync.png",
+  },
+  {
+    title: "E-Commerce App",
+    role: "Fullstack Developer",
+    problem: "Building a modern, responsive, fast, and seamless e-commerce platform for product management and shopping cart experience.",
+    solution: "Developing the e-commerce application using React, TypeScript, and Tailwind CSS with modular architecture, shopping cart state management, and user authentication.",
+    result: "Delivered a high-performance e-commerce application with a clean, responsive user interface and intuitive shopping workflow.",
+    tech: ["React", "TypeScript", "Tailwind CSS"],
+    github: "https://github.com/Nizarafif/e-commerce",
+    demo: "https://e-commerce-six-omega-11.vercel.app/",
+    image_url: "/images/e-commerce.png",
   },
 ];
 
@@ -180,6 +219,10 @@ const fallbackCertifications: Certification[] = [
 
 // Rich technical descriptions & skill badges mapping
 const skillDetails: Record<string, { desc: string; level: "Advanced" | "Intermediate" | "Learning" }> = {
+  "ai agent workflows": { desc: "Orkestrator agen AI otonom, integrasi tool calling, dan akselerasi produktivitas kerja.", level: "Advanced" },
+  "mcp (model context protocol)": { desc: "Integrasi protokol standar MCP untuk menghubungkan tools, database, & server ke AI.", level: "Advanced" },
+  "openai & llm integration": { desc: "Implementasi model AI, embeddings, prompt reasoning, dan fungsionalitas cerdas.", level: "Advanced" },
+  "prompt engineering & rag": { desc: "Optimasi instruksi sistem, retrieval context, dan alur kerja pemecahan masalah otomatis.", level: "Advanced" },
   "javascript": { desc: "Dynamic scripting for frontend & backend application logic.", level: "Advanced" },
   "javascript (es6+)": { desc: "Dynamic scripting for frontend & backend application logic.", level: "Advanced" },
   "typescript": { desc: "Type-safe JavaScript extension for enterprise-scale systems.", level: "Advanced" },
@@ -192,14 +235,17 @@ const skillDetails: Record<string, { desc: string; level: "Advanced" | "Intermed
   "php": { desc: "Server-side interpreter powering enterprise systems.", level: "Advanced" },
   "laravel": { desc: "Elegant PHP framework with secure routing and ORM.", level: "Advanced" },
   "node.js": { desc: "V8 engine runtime for executing backend code.", level: "Advanced" },
+  "restful api architecture": { desc: "Clean Architecture, repository-service pattern, dan REST API berstandar tinggi.", level: "Advanced" },
   "mysql": { desc: "Popular RDBMS database engine for relational tables.", level: "Advanced" },
-  "postgresql": { desc: "Highly robust open-source object-relational database server.", level: "Intermediate" },
+  "postgresql": { desc: "Highly robust open-source object-relational database server.", level: "Advanced" },
+  "supabase": { desc: "Modern cloud Postgres BaaS dengan auth, realtime database, & edge functions.", level: "Advanced" },
   "firebase": { desc: "Serverless BaaS with realtime NoSQL databases and OAuth.", level: "Intermediate" },
   "git": { desc: "Distributed version control system to manage commits.", level: "Advanced" },
   "github": { desc: "Collaboration hosting service for Git revision tracking.", level: "Advanced" },
   "vs code": { desc: "Highly customizable development IDE by Microsoft.", level: "Advanced" },
   "postman": { desc: "Collaboration platform for API design, testing & mocks.", level: "Advanced" },
   "docker": { desc: "Container virtualization engine for reproducible staging.", level: "Intermediate" },
+  "netlify & vercel": { desc: "Platform deployment cloud modern dengan CI/CD otomatis & edge speed.", level: "Advanced" },
   "figma": { desc: "Vector graphics design software for digital wireframes.", level: "Intermediate" },
   "vercel": { desc: "Cloud hosting for frontend and serverless edge functions.", level: "Advanced" },
   "html5": { desc: "Standard semantic structuring language for browser nodes.", level: "Advanced" },
@@ -209,6 +255,18 @@ const skillDetails: Record<string, { desc: string; level: "Advanced" | "Intermed
 };
 
 const fallbackSkills = {
+  ai_agents: [
+    { name: "AI Agent Workflows", icon: Bot, color: "text-teal-500" },
+    { name: "MCP (Model Context Protocol)", icon: Network, color: "text-cyan-500" },
+    { name: "OpenAI & LLM Integration", icon: SiOpenai, color: "text-emerald-500" },
+    { name: "Prompt Engineering & RAG", icon: Sparkles, color: "text-amber-500" },
+  ],
+  backend: [
+    { name: "PHP", icon: SiPhp, color: "text-indigo-500" },
+    { name: "Laravel", icon: SiLaravel, color: "text-red-500" },
+    { name: "Node.js", icon: SiNodedotjs, color: "text-green-500" },
+    { name: "RESTful API Architecture", icon: Cpu, color: "text-teal-600" },
+  ],
   frontend: [
     { name: "JavaScript", icon: SiJavascript, color: "text-yellow-500" },
     { name: "TypeScript", icon: SiTypescript, color: "text-blue-500" },
@@ -217,11 +275,6 @@ const fallbackSkills = {
     { name: "Tailwind CSS", icon: SiTailwindcss, color: "text-cyan-600" },
     { name: "Vue.js", icon: SiVuedotjs, color: "text-emerald-500" },
   ],
-  backend: [
-    { name: "PHP", icon: SiPhp, color: "text-indigo-500" },
-    { name: "Laravel", icon: SiLaravel, color: "text-red-500" },
-    { name: "Node.js", icon: SiNodedotjs, color: "text-green-500" },
-  ],
   mobile: [
     { name: "Flutter", icon: SiFlutter, color: "text-sky-500" },
     { name: "Dart", icon: SiDart, color: "text-sky-600" },
@@ -229,6 +282,7 @@ const fallbackSkills = {
   database: [
     { name: "MySQL", icon: SiMysql, color: "text-blue-650" },
     { name: "PostgreSQL", icon: SiPostgresql, color: "text-sky-600" },
+    { name: "Supabase", icon: SiSupabase, color: "text-emerald-500" },
     { name: "Firebase", icon: SiFirebase, color: "text-amber-500" },
   ],
   tools: [
@@ -236,7 +290,7 @@ const fallbackSkills = {
     { name: "GitHub", icon: Github, color: "text-slate-800" },
     { name: "Docker", icon: SiDocker, color: "text-blue-500" },
     { name: "Postman", icon: SiPostman, color: "text-orange-600" },
-    { name: "Figma", icon: SiFigma, color: "text-rose-500" },
+    { name: "Netlify & Vercel", icon: SiNetlify, color: "text-teal-600" },
     { name: "VS Code", icon: VscVscode, color: "text-blue-500" },
   ],
 };
@@ -254,14 +308,33 @@ export default async function Home() {
   try {
     const supabase = await createClient();
 
-    // Fetch projects
-    const { data: dbProjects, error: projectsErr } = await supabase
-      .from("projects")
-      .select("*")
-      .order("created_at", { ascending: true });
-    
-    if (dbProjects && dbProjects.length > 0 && !projectsErr) {
-      projects = dbProjects.map(p => ({
+    // Fast timeout protection so unreachable/offline database doesn't stall page render
+    const withTimeout = <T,>(promise: PromiseLike<T>, ms = 300): Promise<T> => {
+      let id: NodeJS.Timeout;
+      const timeout = new Promise<never>((_, reject) => {
+        id = setTimeout(() => reject(new Error('Supabase timeout')), ms);
+      });
+      return Promise.race([promise, timeout]).finally(() => clearTimeout(id));
+    };
+
+    // Parallel fetch with timeout fallback
+    const [
+      projectsRes,
+      experiencesRes,
+      educationRes,
+      certificationsRes,
+      skillsRes
+    ] = await Promise.allSettled([
+      withTimeout(supabase.from("projects").select("*").order("created_at", { ascending: true })),
+      withTimeout(supabase.from("experiences").select("*").order("created_at", { ascending: false })),
+      withTimeout(supabase.from("education").select("*").order("created_at", { ascending: false })),
+      withTimeout(supabase.from("certifications").select("*").order("created_at", { ascending: false })),
+      withTimeout(supabase.from("skills").select("*").order("created_at", { ascending: true }))
+    ]);
+
+    // Handle projects
+    if (projectsRes.status === "fulfilled" && projectsRes.value.data && !projectsRes.value.error && projectsRes.value.data.length > 0) {
+      projects = projectsRes.value.data.map(p => ({
         id: p.id,
         title: p.title,
         role: p.role,
@@ -275,44 +348,25 @@ export default async function Home() {
       }));
     }
 
-    // Fetch experiences
-    const { data: dbExperiences, error: expErr } = await supabase
-      .from("experiences")
-      .select("*")
-      .order("created_at", { ascending: false });
-    
-    if (dbExperiences && dbExperiences.length > 0 && !expErr) {
-      experiences = dbExperiences;
+    // Handle experiences
+    if (experiencesRes.status === "fulfilled" && experiencesRes.value.data && !experiencesRes.value.error && experiencesRes.value.data.length > 0) {
+      experiences = experiencesRes.value.data;
     }
 
-    // Fetch education
-    const { data: dbEducation, error: eduErr } = await supabase
-      .from("education")
-      .select("*")
-      .order("created_at", { ascending: false });
-    
-    if (dbEducation && dbEducation.length > 0 && !eduErr) {
-      educationList = dbEducation;
+    // Handle education
+    if (educationRes.status === "fulfilled" && educationRes.value.data && !educationRes.value.error && educationRes.value.data.length > 0) {
+      educationList = educationRes.value.data;
     }
 
-    // Fetch certifications
-    const { data: dbCertifications, error: certErr } = await supabase
-      .from("certifications")
-      .select("*")
-      .order("created_at", { ascending: false });
-    
-    if (dbCertifications && dbCertifications.length > 0 && !certErr) {
-      certifications = dbCertifications;
+    // Handle certifications
+    if (certificationsRes.status === "fulfilled" && certificationsRes.value.data && !certificationsRes.value.error && certificationsRes.value.data.length > 0) {
+      certifications = certificationsRes.value.data;
     }
 
-    // Fetch skills
-    const { data: dbSkills, error: skillsErr } = await supabase
-      .from("skills")
-      .select("*")
-      .order("created_at", { ascending: true });
-    
-    if (dbSkills && dbSkills.length > 0 && !skillsErr) {
-      const getCategorySkills = (cat: 'frontend' | 'backend' | 'tools' | 'mobile' | 'database') => {
+    // Handle skills
+    if (skillsRes.status === "fulfilled" && skillsRes.value.data && !skillsRes.value.error && skillsRes.value.data.length > 0) {
+      const dbSkills = skillsRes.value.data;
+      const getCategorySkills = (cat: string) => {
         return dbSkills
           .filter(s => s.category === cat)
           .map(s => {
@@ -325,6 +379,7 @@ export default async function Home() {
           });
       };
 
+      const ai_agents = getCategorySkills('ai_agents');
       const frontend = getCategorySkills('frontend');
       const backend = getCategorySkills('backend');
       const mobile = getCategorySkills('mobile');
@@ -332,6 +387,7 @@ export default async function Home() {
       const tools = getCategorySkills('tools');
 
       skills = {
+        ai_agents: ai_agents.length > 0 ? ai_agents : fallbackSkills.ai_agents,
         frontend: frontend.length > 0 ? frontend : fallbackSkills.frontend,
         backend: backend.length > 0 ? backend : fallbackSkills.backend,
         mobile: mobile.length > 0 ? mobile : fallbackSkills.mobile,
@@ -345,8 +401,12 @@ export default async function Home() {
 
   // Get dynamic case study page target link
   const getCaseStudyLink = (p: Project) => {
-    if (p.title.toLowerCase().includes("commerce")) return "/projects/e-commerce";
-    if (p.title.toLowerCase().includes("flowsync")) return "/projects/flowsync";
+    const t = p.title.toLowerCase();
+    if (t.includes("resumora")) return "/projects/resumora";
+    if (t.includes("nexaops")) return "/projects/nexaops";
+    if (t.includes("nexaport")) return "/projects/nexaport";
+    if (t.includes("commerce")) return "/projects/e-commerce";
+    if (t.includes("flowsync")) return "/projects/flowsync";
     return p.id ? `/projects/${p.id}` : "#";
   };
 
@@ -623,11 +683,12 @@ export default async function Home() {
             <div className="md:col-span-2 space-y-8">
               {/* Categorized Skills */}
               {[
-                { title: "Backend Technologies", list: skills.backend, icon: Cpu },
+                { title: "AI Engineering & Agentic Workflows", list: skills.ai_agents || fallbackSkills.ai_agents, icon: Bot },
+                { title: "Backend & API Architecture", list: skills.backend, icon: Cpu },
                 { title: "Frontend Frameworks", list: skills.frontend, icon: Layers },
                 { title: "Mobile Engineering", list: skills.mobile, icon: Smartphone },
-                { title: "Database Systems", list: skills.database, icon: Database },
-                { title: "Development Tools", list: skills.tools, icon: Wrench }
+                { title: "Database & Cloud Systems", list: skills.database, icon: Database },
+                { title: "DevOps & Development Tools", list: skills.tools, icon: Wrench }
               ].map((category) => (
                 <div key={category.title} className="space-y-3">
                   <h3 className="text-xs font-bold text-slate-500 flex items-center gap-2 uppercase tracking-wider pl-1">
@@ -688,7 +749,7 @@ export default async function Home() {
           </div>
           
           <div className="grid gap-8 md:grid-cols-2">
-              {projects.map((project) => (
+              {projects.map((project, idx) => (
                 <article
                   key={project.title}
                   className="group flex flex-col overflow-hidden rounded-xl border border-slate-200/60 bg-white transition-all duration-300 hover:border-teal-500/25 hover:shadow-lg hover:shadow-slate-100"
@@ -700,6 +761,7 @@ export default async function Home() {
                         src={project.image_url}
                         alt={`${project.title} preview`}
                         fill
+                        priority={idx < 2}
                         className="object-cover object-top transition-transform duration-500 group-hover:scale-105"
                         sizes="(max-width: 768px) 100vw, 50vw"
                       />
@@ -744,13 +806,10 @@ export default async function Home() {
                         <span>Source Code</span>
                       </a>
                       
-                      <Link
+                      <CaseStudyLink
                         href={getCaseStudyLink(project)}
-                        className="text-teal-600 hover:text-teal-500 transition-colors inline-flex items-center gap-1 font-bold"
-                      >
-                        <span>View Case Study</span>
-                        <ArrowUpRight className="h-4 w-4" />
-                      </Link>
+                        projectTitle={project.title}
+                      />
                     </div>
                   </div>
                 </article>

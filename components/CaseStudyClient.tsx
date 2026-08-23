@@ -1,8 +1,8 @@
 'use client';
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
-import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { 
   ArrowLeft, 
@@ -13,7 +13,8 @@ import {
   CheckCircle, 
   Play, 
   Maximize2,
-  X 
+  X,
+  Loader2
 } from "lucide-react";
 import { SiGithub as Github } from "react-icons/si";
 import { type CaseStudyData } from "@/utils/case-studies";
@@ -24,6 +25,19 @@ interface CaseStudyClientProps {
 
 export default function CaseStudyClient({ data }: CaseStudyClientProps) {
   const [activeImage, setActiveImage] = useState<string | null>(null);
+  const [isReturningHome, setIsReturningHome] = useState(false);
+  const router = useRouter();
+
+  useEffect(() => {
+    router.prefetch('/');
+  }, [router]);
+
+  const handleBackHome = (e: React.MouseEvent) => {
+    e.preventDefault();
+    if (isReturningHome) return;
+    setIsReturningHome(true);
+    router.push('/');
+  };
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -47,10 +61,23 @@ export default function CaseStudyClient({ data }: CaseStudyClientProps) {
       {/* Header Sticky Navbar for Case Study */}
       <header className="sticky top-0 z-30 border-b border-slate-200/50 bg-white/70 backdrop-blur-md">
         <nav className="mx-auto flex max-w-5xl items-center justify-between px-6 py-4 lg:px-0">
-          <Link href="/" className="inline-flex items-center gap-2 text-xs font-bold text-slate-600 hover:text-teal-600 transition-colors">
-            <ArrowLeft className="h-4 w-4" />
-            <span>Back to Home</span>
-          </Link>
+          <button 
+            onClick={handleBackHome}
+            disabled={isReturningHome}
+            className="inline-flex items-center gap-2 text-xs font-bold text-slate-600 hover:text-teal-600 transition-colors cursor-pointer disabled:opacity-75"
+          >
+            {isReturningHome ? (
+              <>
+                <Loader2 className="h-4 w-4 animate-spin text-teal-600" />
+                <span className="text-teal-600 font-bold">Kembali ke Beranda...</span>
+              </>
+            ) : (
+              <>
+                <ArrowLeft className="h-4 w-4" />
+                <span>Back to Home</span>
+              </>
+            )}
+          </button>
           <div className="flex gap-4">
             <a 
               href={data.github} 
@@ -228,8 +255,83 @@ export default function CaseStudyClient({ data }: CaseStudyClientProps) {
               </div>
             </motion.section>
           )}
+          {/* Bottom Back to Home CTA */}
+          <motion.div variants={itemVariants} className="pt-8 border-t border-slate-200/80 flex items-center justify-between flex-wrap gap-4">
+            <button
+              onClick={handleBackHome}
+              disabled={isReturningHome}
+              className="inline-flex items-center gap-2.5 px-6 py-3 rounded-xl bg-slate-900 text-white hover:bg-slate-800 transition-all font-bold text-xs shadow-lg shadow-slate-900/10 cursor-pointer disabled:opacity-75 group"
+            >
+              {isReturningHome ? (
+                <>
+                  <Loader2 className="h-4 w-4 animate-spin text-teal-400" />
+                  <span>Membuka Beranda...</span>
+                </>
+              ) : (
+                <>
+                  <ArrowLeft className="h-4 w-4 transition-transform group-hover:-translate-x-1" />
+                  <span>Kembali ke Beranda</span>
+                </>
+              )}
+            </button>
+
+            {data.demo && (
+              <a
+                href={data.demo}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-teal-600 text-white hover:bg-teal-500 transition-all font-bold text-xs shadow-lg shadow-teal-500/20"
+              >
+                <span>Kunjungi Live Demo</span>
+                <ExternalLink className="h-4 w-4" />
+              </a>
+            )}
+          </motion.div>
         </motion.div>
       </main>
+
+      {/* Global 1.5s Returning Home Modal */}
+      {isReturningHome && (
+        <div className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-slate-950/70 backdrop-blur-md transition-all duration-300">
+          <div className="absolute w-80 h-80 bg-teal-500/25 rounded-full blur-[110px] pointer-events-none" />
+          <div className="absolute w-64 h-64 bg-indigo-500/20 rounded-full blur-[110px] pointer-events-none" />
+          
+          <div className="relative z-10 flex flex-col items-center gap-5 bg-slate-900/95 border border-teal-500/30 p-8 rounded-3xl shadow-2xl max-w-sm w-full mx-4 text-center">
+            <div className="relative flex items-center justify-center">
+              <div className="w-16 h-16 border-4 border-teal-500/20 border-t-teal-400 rounded-full animate-spin" />
+              <div className="absolute w-10 h-10 border-4 border-teal-400/30 border-b-teal-300 rounded-full animate-spin [animation-direction:reverse]" />
+            </div>
+
+            <div className="space-y-1.5">
+              <span className="inline-block px-2.5 py-0.5 rounded-full bg-teal-500/10 border border-teal-500/30 text-[10px] font-semibold text-teal-300 uppercase tracking-widest">
+                Navigasi
+              </span>
+              <h3 className="text-lg font-extrabold text-white tracking-wide">
+                Kembali ke Beranda
+              </h3>
+              <p className="text-xs text-slate-400 font-medium">
+                Sedang mengarahkan ke halaman utama...
+              </p>
+            </div>
+
+            <div className="w-full bg-slate-800/80 h-2 rounded-full overflow-hidden p-0.5 border border-slate-700/50">
+              <div 
+                className="bg-gradient-to-r from-teal-400 via-emerald-400 to-cyan-400 h-full rounded-full"
+                style={{
+                  animation: 'fillProgress 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards'
+                }}
+              />
+            </div>
+          </div>
+
+          <style jsx>{`
+            @keyframes fillProgress {
+              0% { width: 0%; }
+              100% { width: 100%; }
+            }
+          `}</style>
+        </div>
+      )}
 
       {/* Fullscreen Image Preview Modal */}
       <AnimatePresence>

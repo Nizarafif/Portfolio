@@ -3,7 +3,7 @@ import {
   SiJavascript, SiTypescript, SiReact, SiNextdotjs, SiTailwindcss,
   SiNodedotjs, SiMysql, SiPhp, SiLaravel,
   SiGit, SiGithub, SiPostman, SiVuedotjs, SiPostgresql, SiFlutter, SiFirebase,
-  SiDocker, SiFigma, SiVercel
+  SiDocker, SiFigma, SiVercel, SiOpenai, SiSupabase, SiNetlify, SiRedis
 } from "react-icons/si";
 import { VscVscode } from "react-icons/vsc";
 
@@ -27,6 +27,10 @@ export const iconsMap: Record<string, IconType> = {
   SiDocker,
   SiFigma,
   SiVercel,
+  SiOpenai,
+  SiSupabase,
+  SiNetlify,
+  SiRedis,
   VscVscode,
 };
 

@@ -93,5 +93,119 @@ Workspace Analytics Engine`,
     gallery: [
       "/images/Flowsync.png"
     ]
+  },
+  "nexaops": {
+    title: "NexaOps",
+    role: "Fullstack Developer & System Architect",
+    category: "IT Operations & Asset Management",
+    timeline: "Aug 2026",
+    status: "Completed",
+    tech: ["Laravel 13", "React", "TypeScript", "Tailwind CSS", "Vite", "Framer Motion", "Recharts"],
+    github: "https://github.com/Nizarafif/nexaops",
+    demo: "https://nexaops.vercel.app/",
+    image_url: "/images/nexaops.png",
+    problem: "Perusahaan sering menghadapi kesulitan dalam memantau siklus hidup aset IT (hardware, software, lisensi, dan perangkat jaringan), risiko kehilangan riwayat mutasi aset, serta tidak adanya peringatan dini masa garansi dan kalkulasi depresiasi otomatis.",
+    solution: "Membangun NexaOps, sistem IT Asset Monitoring & Management komprehensif berbasis Clean Architecture dengan Laravel 13 REST API dan React 18 (Vite). Dilengkapi live monitoring dashboard, QR Code scanner/generator fisik, jejak audit mutasi, dan visualisasi distribusi aset.",
+    keyFeatures: [
+      "Real-time Telemetry & Asset Health Monitoring Dashboard",
+      "Interactive Network Topology & Server Rack Visualizer",
+      "Physical Barcode & QR Code Label Generator with Quick Scan",
+      "Automated Warranty Expiration Alerts & Depreciation Calculator",
+      "Role-Based Access Control (RBAC) & Immutable Mutation Audit Logs",
+      "Dark Mode & Light Mode with Fluid Framer Motion Transitions"
+    ],
+    systemArchitecture: `React 18 + Vite (TypeScript & Tailwind)
+      ↓
+TanStack Query & Zustand State Management
+      ↓
+Laravel 13 REST API (Service Layer & Repository Pattern)
+      ↓
+PostgreSQL / MySQL + Sanitized Audit Trail Logging`,
+    challenges: "Menghadirkan visualisasi topologi jaringan dan data monitoring real-time tanpa membebani performa browser serta memastikan integritas riwayat pergerakan aset. Diatasi dengan TanStack Query caching dan pagination teroptimasi.",
+    resultsMetrics: [
+      "100% Comprehensive Audit Trail mutasi seluruh perangkat IT",
+      "Visualisasi Recharts & topology map real-time berkinerja tinggi",
+      "Dukungan cetak QR Code label siap pakai untuk inventarisasi fisik",
+      "Arsitektur modular Clean Architecture berbasis Service-Repository"
+    ],
+    gallery: [
+      "/images/nexaops.png"
+    ]
+  },
+  "nexaport": {
+    title: "NexaPort",
+    role: "Fullstack Developer & Lead Engineer",
+    category: "Logistics & Depot Management",
+    timeline: "Aug 2026",
+    status: "Completed",
+    tech: ["Laravel", "React", "TypeScript", "Tailwind CSS", "Vite", "PostgreSQL", "Lucide React"],
+    github: "https://github.com/Nizarafif/nexaport",
+    demo: "https://nexaport.vercel.app/",
+    image_url: "/images/nexaport.png",
+    problem: "Operasional logistik peti kemas dan depo kontainer sering menghadapi inefisiensi akibat pelacakan manual, keterlambatan informasi status kontainer in/out, dan manajemen yard yang belum terotomatisasi.",
+    solution: "Mengembangkan platform Intelligent Container Logistics & Depot Platform terpadu dengan Laravel REST API (PostgreSQL immutable ledger) dan React TypeScript frontend. Dilengkapi visualisasi yard 2D/3D interaktif, pelacak kontainer publik, gate automation, dan invoice billing.",
+    keyFeatures: [
+      "2D/3D Interactive Container Depot Yard Map Visualizer",
+      "Real-time Shipment & Container Status Tracker (In-Gate / Out-Gate)",
+      "Automated Gate Operations Log & Equipment Scheduling",
+      "Immutable Container Movement Ledger dengan Riwayat Logistik Lengkap",
+      "Vessel Arrival/Departure Schedule Monitoring & Berthing Management",
+      "Billing, Invoicing, & Automatic EDI/Export Data Integration"
+    ],
+    systemArchitecture: `React Frontend (Vite, TypeScript & Tailwind CSS)
+      ↓
+Logistics Operations Portal & Container Visualizer
+      ↓
+Laravel REST API Backend (Sanctum RBAC & Service Layer)
+      ↓
+PostgreSQL 16 Database with Immutable Movement Ledger`,
+    challenges: "Merancang visualisasi denah yard kontainer multi-tier yang responsif dan interaktif serta sinkronisasi pergerakan kontainer masuk/keluar depo secara real-time. Diselesaikan dengan visualizer interaktif berbasis slot kompartemen yard.",
+    resultsMetrics: [
+      "Visualisasi denah depo 2D/3D dengan kapasitas ratusan kontainer",
+      "Pencatatan ledger mutasi kontainer dengan akurasi 100%",
+      "Portal publik cepat untuk pelacakan kontainer dan gate pass",
+      "Kecepatan respon API di bawah 120ms untuk ribuan pergerakan logistik"
+    ],
+    gallery: [
+      "/images/nexaport.png"
+    ]
+  },
+  "resumora": {
+    title: "Resumora",
+    role: "Fullstack / Frontend Engineer",
+    category: "AI & Productivity SaaS",
+    timeline: "Aug 2026",
+    status: "Completed",
+    tech: ["React 19", "TypeScript", "Tailwind CSS", "Vite", "Framer Motion", "Zustand", "Zod", "Supabase"],
+    github: "https://github.com/Nizarafif/resumora",
+    demo: "https://resumoraa.netlify.app/",
+    image_url: "/images/resumora.png",
+    problem: "Pembuatan CV/Resume profesional yang lolos uji Applicant Tracking System (ATS) seringkali memakan waktu lama, sulit disesuaikan dengan deskripsi pekerjaan target, serta minim panduan penulisan poin pencapaian yang berdampak.",
+    solution: "Membangun Resumora, platform AI Resume Builder modern dengan live dynamic preview editor, ATS Match Score calculator, asisten penulisan berbasis AI untuk memperkuat bullet point pekerjaan, template resume profesional multi-tema, serta ekspor PDF instan dan QR Code sharing.",
+    keyFeatures: [
+      "Real-time Split-Screen Resume Editor & Live Dynamic Preview",
+      "ATS Match Score Analyzer & Keyword Optimization Engine",
+      "AI Writing Assistant Panel untuk perbaikan tata bahasa & formulasi dampak",
+      "Multi-Template System (ATS Professional, Modern, Creative, Elegant, Executive, Minimal)",
+      "Instant High-Resolution PDF Export & Printable Document Rendering",
+      "Supabase Cloud Sync, Public Shareable Link & QR Code Generation"
+    ],
+    systemArchitecture: `React 19 + Vite (TypeScript & Tailwind CSS)
+      ↓
+Zustand Global State + React Hook Form (Zod Validation)
+      ↓
+AI Provider Layer & ATS Scoring Engine
+      ↓
+Supabase Backend & Edge Services + Netlify Deployment`,
+    challenges: "Menghadirkan performa rendering live preview resume instan tanpa delay ketikan pada form yang kompleks, serta mempertahankan tata letak layout PDF saat dicetak/diekspor. Diatasi dengan debounced state updates dan print CSS stylesheet terstandarisasi.",
+    resultsMetrics: [
+      "98%+ ATS Compatibility Score pada seluruh template resume bawaan",
+      "Live preview sinkronisasi instan tanpa lag di bawah 16ms",
+      "Fitur ekspor PDF berkualitas tinggi dan siap cetak",
+      "Terdeploy secara live dan dapat diakses di resumoraa.netlify.app"
+    ],
+    gallery: [
+      "/images/resumora.png"
+    ]
   }
 };
