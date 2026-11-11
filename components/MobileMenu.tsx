@@ -68,7 +68,7 @@ export default function MobileMenu({
               animate={{ x: 0 }}
               exit={{ x: "100%" }}
               transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
-              className="fixed bottom-0 right-0 top-0 z-40 flex h-dvh w-[280px] flex-col border-l border-[var(--border-subtle)] bg-[var(--bg-primary)] p-6 pt-20"
+              className="fixed bottom-0 right-0 top-0 z-40 flex h-dvh w-[280px] flex-col border-l border-[var(--border-subtle)] bg-[var(--bg-primary)] p-6 pt-28"
             >
               <div className="mb-6 flex items-center gap-2 font-mono text-[11px] uppercase tracking-widest text-[var(--text-secondary)]">
                 <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />

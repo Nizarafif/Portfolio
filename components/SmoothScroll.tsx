@@ -10,7 +10,7 @@ export default function SmoothScroll() {
 
       if (element) {
         e.preventDefault();
-        const headerOffset = 72;
+        const headerOffset = 96;
         const elementPosition =
           element.getBoundingClientRect().top + window.scrollY;
         const offsetPosition = elementPosition - headerOffset;

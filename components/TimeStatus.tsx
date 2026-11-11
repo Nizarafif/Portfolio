@@ -1,49 +1,51 @@
-'use client';
+"use client";
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 
 export default function TimeStatus() {
-  const [time, setTime] = useState<string>('');
-  const [mounted, setMounted] = useState(false);
+  const [time, setTime] = useState<string>("");
+  const [updateMonth, setUpdateMonth] = useState<string>("");
 
   useEffect(() => {
-    setMounted(true);
-    const updateTime = () => {
+    const updateClock = () => {
       const now = new Date();
-      const timeString = now.toLocaleTimeString("en-US", {
+      const timeString = now.toLocaleTimeString("en-GB", {
         timeZone: "Asia/Jakarta",
         hour: "2-digit",
         minute: "2-digit",
-        hour12: false
+        hour12: false,
       });
+      const monthString = now
+        .toLocaleDateString("en-US", {
+          timeZone: "Asia/Jakarta",
+          month: "short",
+          year: "numeric",
+        })
+        .toUpperCase();
+
       setTime(timeString);
+      setUpdateMonth(monthString);
     };
 
-    updateTime();
-    const interval = setInterval(updateTime, 60000); // Update setiap 1 menit
+    updateClock();
+    const interval = setInterval(updateClock, 15000);
     return () => clearInterval(interval);
   }, []);
 
-  const formatUpdateMonth = () => {
-    const now = new Date();
-    return now.toLocaleDateString("en-US", {
-      month: "short",
-      year: "numeric"
-    }).toUpperCase(); // Hasil format: "AUG 2026"
-  };
-
   return (
-    <div className="w-full border-b border-slate-100 bg-slate-50/50 py-2 px-6">
-      <div className="mx-auto flex max-w-5xl items-center justify-between text-[10px] font-bold tracking-widest text-slate-500 uppercase lg:px-0">
+    <div className="w-full border-b border-[var(--border-subtle)] bg-[var(--nav-blur)] backdrop-blur-md">
+      <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-2 font-mono text-[10px] uppercase tracking-[0.18em] text-[var(--text-secondary)] lg:px-8">
         <div className="flex items-center gap-2">
-          <span className="w-1.5 h-1.5 rounded-full bg-teal-600" />
+          <span className="h-1.5 w-1.5 rounded-full bg-[var(--accent)]" />
           <span>
             Kudus, Indonesia
-            {mounted && time ? ` · ${time} WIB` : ''}
+            {time ? (
+              <span className="text-[var(--text-primary)]"> · {time} WIB</span>
+            ) : null}
           </span>
         </div>
         <div>
-          <span>Updated {formatUpdateMonth()}</span>
+          <span>Updated {updateMonth || "NOV 2026"}</span>
         </div>
       </div>
     </div>

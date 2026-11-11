@@ -578,7 +578,7 @@ export default async function Home() {
         {/* 2. HERO SECTION */}
         <section
           id="home"
-          className="scroll-mt-16 pb-24 pt-32 md:pb-32 md:pt-40"
+          className="scroll-mt-24 pb-24 pt-36 md:pb-32 md:pt-44"
         >
           <div className="grid items-end gap-12 lg:grid-cols-12">
             <div className="space-y-8 lg:col-span-8">

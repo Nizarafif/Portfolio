@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import MobileMenu from "./MobileMenu";
 import ThemeToggle from "./ThemeToggle";
+import TimeStatus from "./TimeStatus";
 
 export interface NavItem {
   href: string;
@@ -60,6 +61,7 @@ export default function Navbar({ navItems }: NavbarProps) {
           : "bg-transparent border-b border-transparent"
       }`}
     >
+      <TimeStatus />
       <nav
         aria-label="Primary Navigation"
         className="mx-auto flex h-16 max-w-6xl items-center justify-between px-6 lg:px-8"
