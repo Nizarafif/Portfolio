@@ -1,9 +1,31 @@
 import { type IconType } from "react-icons";
-import { 
-  SiJavascript, SiTypescript, SiReact, SiNextdotjs, SiTailwindcss,
-  SiNodedotjs, SiMysql, SiPhp, SiLaravel,
-  SiGit, SiGithub, SiPostman, SiVuedotjs, SiPostgresql, SiFlutter, SiFirebase,
-  SiDocker, SiFigma, SiVercel, SiOpenai, SiSupabase, SiNetlify, SiRedis
+import {
+  SiJavascript,
+  SiTypescript,
+  SiReact,
+  SiNextdotjs,
+  SiTailwindcss,
+  SiNodedotjs,
+  SiMysql,
+  SiPhp,
+  SiLaravel,
+  SiGit,
+  SiGithub,
+  SiPostman,
+  SiVuedotjs,
+  SiPostgresql,
+  SiFlutter,
+  SiFirebase,
+  SiDocker,
+  SiFigma,
+  SiVercel,
+  SiOpenai,
+  SiSupabase,
+  SiNetlify,
+  SiRedis,
+  SiDart,
+  SiHtml5,
+  SiCss3,
 } from "react-icons/si";
 import { VscVscode } from "react-icons/vsc";
 
@@ -31,6 +53,9 @@ export const iconsMap: Record<string, IconType> = {
   SiSupabase,
   SiNetlify,
   SiRedis,
+  SiDart,
+  SiHtml5,
+  SiCss3,
   VscVscode,
 };
 

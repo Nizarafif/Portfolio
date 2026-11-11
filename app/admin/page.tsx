@@ -90,15 +90,18 @@ export default function AdminPage() {
       tailwindcss: { icon: "SiTailwindcss", color: "text-cyan-450", cat: "frontend" },
       vue: { icon: "SiVuedotjs", color: "text-emerald-500", cat: "frontend" },
       vuejs: { icon: "SiVuedotjs", color: "text-emerald-500", cat: "frontend" },
-      flutter: { icon: "SiFlutter", color: "text-sky-400", cat: "frontend" },
+      flutter: { icon: "SiFlutter", color: "text-sky-400", cat: "mobile" },
+      dart: { icon: "SiDart", color: "text-blue-400", cat: "mobile" },
       php: { icon: "SiPhp", color: "text-indigo-400", cat: "backend" },
       laravel: { icon: "SiLaravel", color: "text-red-500", cat: "backend" },
       nodejs: { icon: "SiNodedotjs", color: "text-green-500", cat: "backend" },
       node: { icon: "SiNodedotjs", color: "text-green-500", cat: "backend" },
-      mysql: { icon: "SiMysql", color: "text-blue-400", cat: "backend" },
-      postgresql: { icon: "SiPostgresql", color: "text-sky-500", cat: "backend" },
-      postgres: { icon: "SiPostgresql", color: "text-sky-500", cat: "backend" },
-      firebase: { icon: "SiFirebase", color: "text-amber-500", cat: "backend" },
+      mysql: { icon: "SiMysql", color: "text-blue-400", cat: "database" },
+      postgresql: { icon: "SiPostgresql", color: "text-sky-500", cat: "database" },
+      postgres: { icon: "SiPostgresql", color: "text-sky-500", cat: "database" },
+      supabase: { icon: "SiSupabase", color: "text-emerald-400", cat: "database" },
+      firebase: { icon: "SiFirebase", color: "text-amber-500", cat: "database" },
+      openai: { icon: "SiOpenai", color: "text-emerald-400", cat: "ai_agents" },
       git: { icon: "SiGit", color: "text-orange-500", cat: "tools" },
       github: { icon: "SiGithub", color: "text-slate-300", cat: "tools" },
       vscode: { icon: "VscVscode", color: "text-blue-500", cat: "tools" },
@@ -820,9 +823,12 @@ export default function AdminPage() {
                         onChange={(e) => setSkillForm(prev => ({ ...prev, category: e.target.value }))}
                         className="w-full px-3 py-2 text-xs bg-slate-900 border border-slate-800 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent text-white"
                       >
-                        <option value="frontend">Frontend</option>
                         <option value="backend">Backend</option>
-                        <option value="tools">Tools</option>
+                        <option value="frontend">Frontend</option>
+                        <option value="mobile">Mobile</option>
+                        <option value="database">Database &amp; Cloud</option>
+                        <option value="tools">DevOps &amp; Tools</option>
+                        <option value="ai_agents">AI &amp; Automation</option>
                       </select>
                     </div>
                   </div>

@@ -1,12 +1,9 @@
-'use client';
+"use client";
 
-import { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Mail, Phone } from 'lucide-react';
-import { SiGithub as Github, SiLinkedin as Linkedin } from 'react-icons/si';
-
-
-
+import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Mail, Phone, X, Menu } from "lucide-react";
+import { SiGithub as Github, SiLinkedin as Linkedin } from "react-icons/si";
 
 interface NavItem {
   href: string;
@@ -15,171 +12,145 @@ interface NavItem {
 
 interface MobileMenuProps {
   navItems: NavItem[];
+  activeSection?: string;
 }
 
-export default function MobileMenu({ navItems }: MobileMenuProps) {
+export default function MobileMenu({
+  navItems,
+  activeSection = "home",
+}: MobileMenuProps) {
   const [isOpen, setIsOpen] = useState(false);
 
-  // Disable scrolling when menu is open
   useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setIsOpen(false);
+    };
+
     if (isOpen) {
-      document.body.style.overflow = 'hidden';
+      document.body.style.overflow = "hidden";
+      window.addEventListener("keydown", handleKeyDown);
     } else {
-      document.body.style.overflow = '';
+      document.body.style.overflow = "";
     }
+
     return () => {
-      document.body.style.overflow = '';
+      document.body.style.overflow = "";
+      window.removeEventListener("keydown", handleKeyDown);
     };
   }, [isOpen]);
 
-  const toggleMenu = () => setIsOpen(!isOpen);
-
-  const menuVariants = {
-    closed: {
-      x: '100%',
-      transition: {
-        type: 'spring' as const,
-        stiffness: 300,
-        damping: 30,
-      },
-    },
-    open: {
-      x: 0,
-      transition: {
-        type: 'spring' as const,
-        stiffness: 300,
-        damping: 30,
-        staggerChildren: 0.08,
-        delayChildren: 0.1,
-      },
-    },
-  };
-
-  const itemVariants = {
-    closed: { opacity: 0, x: 20 },
-    open: { opacity: 1, x: 0 },
-  };
-
-  const backdropVariants = {
-    closed: { opacity: 0 },
-    open: { opacity: 1 },
-  };
-
   return (
-    <div className="sm:hidden">
-      {/* Hamburger Trigger */}
+    <div className="md:hidden">
       <button
-        onClick={toggleMenu}
-        className="relative z-50 flex h-10 w-10 items-center justify-center rounded-xl border border-slate-200 bg-white shadow-sm transition-colors hover:border-teal-500/50"
-        aria-label="Toggle menu"
+        type="button"
+        onClick={() => setIsOpen((prev) => !prev)}
+        className="relative z-50 flex h-9 w-9 items-center justify-center rounded-sm border border-[var(--border-subtle)] bg-[var(--bg-surface)] text-[var(--text-primary)] transition-colors hover:border-[var(--border-hover)]"
+        aria-label={isOpen ? "Close navigation menu" : "Open navigation menu"}
+        aria-expanded={isOpen}
       >
-        <div className="relative h-6 w-6 flex flex-col justify-center items-center">
-          {/* Top Line */}
-          <motion.span
-            animate={isOpen ? { rotate: 45, y: 0 } : { rotate: 0, y: -6 }}
-            transition={{ duration: 0.2 }}
-            className="absolute h-0.5 w-5 rounded-full bg-slate-700"
-          />
-          {/* Middle Line */}
-          <motion.span
-            animate={isOpen ? { opacity: 0 } : { opacity: 1 }}
-            transition={{ duration: 0.2 }}
-            className="absolute h-0.5 w-5 rounded-full bg-slate-700"
-          />
-          {/* Bottom Line */}
-          <motion.span
-            animate={isOpen ? { rotate: -45, y: 0 } : { rotate: 0, y: 6 }}
-            transition={{ duration: 0.2 }}
-            className="absolute h-0.5 w-5 rounded-full bg-slate-700"
-          />
-        </div>
+        {isOpen ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
       </button>
 
-      {/* Menu Overlay */}
       <AnimatePresence>
         {isOpen && (
           <>
-            {/* Backdrop */}
             <motion.div
-              initial="closed"
-              animate="open"
-              exit="closed"
-              variants={backdropVariants}
-              onClick={toggleMenu}
-              className="fixed inset-0 z-40 bg-slate-900/30 backdrop-blur-sm"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.2 }}
+              onClick={() => setIsOpen(false)}
+              className="fixed inset-0 z-40 bg-black/60 backdrop-blur-sm"
             />
 
-            {/* Side Drawer */}
-            <motion.div
-              initial="closed"
-              animate="open"
-              exit="closed"
-              variants={menuVariants}
-              className="fixed bottom-0 right-0 top-0 z-40 flex h-screen w-[280px] flex-col bg-white/95 p-6 shadow-2xl backdrop-blur-md border-l border-slate-100"
+            <motion.aside
+              initial={{ x: "100%" }}
+              animate={{ x: 0 }}
+              exit={{ x: "100%" }}
+              transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
+              className="fixed bottom-0 right-0 top-0 z-40 flex h-dvh w-[280px] flex-col border-l border-[var(--border-subtle)] bg-[var(--bg-primary)] p-6 pt-20"
             >
-              {/* Top offset to clear the fixed layout top bar */}
-              <div className="h-24" />
-
-              {/* Navigation Links */}
-              <div className="flex flex-col gap-1.5 py-6">
-                <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-2 px-4">Menu</span>
-                {navItems.map((item) => (
-                  <motion.a
-                    key={item.href}
-                    href={item.href}
-                    variants={itemVariants}
-                    onClick={() => setIsOpen(false)}
-                    className="flex items-center rounded-xl px-4 py-3 text-sm font-semibold text-slate-650 transition-all hover:bg-teal-50 hover:text-teal-600 active:bg-teal-100"
-                  >
-                    {item.label}
-                  </motion.a>
-                ))}
+              <div className="mb-6 flex items-center gap-2 font-mono text-[11px] uppercase tracking-widest text-[var(--text-secondary)]">
+                <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
+                <span>Open to Work · Kudus, ID</span>
               </div>
 
-              {/* Spacer */}
-              <div className="flex-1" />
+              <nav
+                className="flex flex-col border-t border-[var(--border-subtle)]"
+                aria-label="Mobile Navigation"
+              >
+                {navItems.map((item, idx) => {
+                  const id = item.href.replace("#", "");
+                  const isActive = activeSection === id;
 
-              {/* Contact / Social Links */}
-              <motion.div variants={itemVariants} className="border-t border-slate-100 pt-6 pb-8 space-y-4">
-                <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest block mb-2 px-1">Connect</span>
+                  return (
+                    <a
+                      key={item.href}
+                      href={item.href}
+                      onClick={() => setIsOpen(false)}
+                      className={`flex items-center justify-between border-b border-[var(--border-subtle)] py-3.5 text-sm font-medium transition-colors ${
+                        isActive
+                          ? "text-[var(--text-primary)]"
+                          : "text-[var(--text-secondary)] hover:text-[var(--text-primary)]"
+                      }`}
+                    >
+                      <span>{item.label}</span>
+                      <span
+                        className={`font-mono text-[11px] ${
+                          isActive
+                            ? "text-[var(--accent)]"
+                            : "text-[var(--text-muted)]"
+                        }`}
+                      >
+                        0{idx + 1}
+                      </span>
+                    </a>
+                  );
+                })}
+              </nav>
+
+              <div className="mt-auto space-y-4 border-t border-[var(--border-subtle)] pt-6">
+                <p className="font-mono text-[10px] uppercase tracking-widest text-[var(--text-muted)]">
+                  Connect
+                </p>
                 <div className="grid grid-cols-4 gap-2">
                   <a
                     href="mailto:nizarnurafif644@gmail.com"
-                    className="flex h-10 w-10 items-center justify-center rounded-xl border border-slate-200 bg-white text-slate-600 shadow-sm transition-colors hover:border-teal-500/20 hover:text-teal-600"
-                    title="Email"
+                    className="flex h-10 items-center justify-center rounded-sm border border-[var(--border-subtle)] bg-[var(--bg-surface)] text-[var(--text-secondary)] transition-colors hover:border-[var(--border-hover)] hover:text-[var(--text-primary)]"
+                    aria-label="Email"
                   >
-                    <Mail className="h-4.5 w-4.5" />
+                    <Mail className="h-4 w-4" />
                   </a>
                   <a
                     href="https://linkedin.com/in/nizarnurafif"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex h-10 w-10 items-center justify-center rounded-xl border border-slate-200 bg-white text-slate-600 shadow-sm transition-colors hover:border-teal-500/20 hover:text-teal-600"
-                    title="LinkedIn"
+                    className="flex h-10 items-center justify-center rounded-sm border border-[var(--border-subtle)] bg-[var(--bg-surface)] text-[var(--text-secondary)] transition-colors hover:border-[var(--border-hover)] hover:text-[var(--text-primary)]"
+                    aria-label="LinkedIn"
                   >
-                    <Linkedin className="h-4.5 w-4.5" />
+                    <Linkedin className="h-4 w-4" />
                   </a>
                   <a
                     href="https://github.com/Nizarafif"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex h-10 w-10 items-center justify-center rounded-xl border border-slate-200 bg-white text-slate-600 shadow-sm transition-colors hover:border-teal-500/20 hover:text-teal-600"
-                    title="GitHub"
+                    className="flex h-10 items-center justify-center rounded-sm border border-[var(--border-subtle)] bg-[var(--bg-surface)] text-[var(--text-secondary)] transition-colors hover:border-[var(--border-hover)] hover:text-[var(--text-primary)]"
+                    aria-label="GitHub"
                   >
-                    <Github className="h-4.5 w-4.5" />
+                    <Github className="h-4 w-4" />
                   </a>
                   <a
-                    href="https://wa.me/6282242131665"
+                    href="https://wa.me/6281806344925"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex h-10 w-10 items-center justify-center rounded-xl border border-slate-200 bg-white text-slate-600 shadow-sm transition-colors hover:border-teal-500/20 hover:text-teal-600"
-                    title="WhatsApp"
+                    className="flex h-10 items-center justify-center rounded-sm border border-[var(--border-subtle)] bg-[var(--bg-surface)] text-[var(--text-secondary)] transition-colors hover:border-[var(--border-hover)] hover:text-[var(--text-primary)]"
+                    aria-label="WhatsApp"
                   >
-                    <Phone className="h-4.5 w-4.5" />
+                    <Phone className="h-4 w-4" />
                   </a>
                 </div>
-              </motion.div>
-            </motion.div>
+              </div>
+            </motion.aside>
           </>
         )}
       </AnimatePresence>
