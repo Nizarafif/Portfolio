@@ -15,14 +15,14 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Nizar Nur Afif — Software Engineer & Full Stack Developer",
+  title: "Nizar Nur Afif — Software Engineer",
   description:
     "Personal developer portfolio of Nizar Nur Afif, Software Engineer from Kudus, Indonesia focused on scalable web applications, backend systems, and modern mobile experiences.",
   icons: {
     icon: "/nizar-logo.png",
   },
   openGraph: {
-    title: "Nizar Nur Afif — Software Engineer & Full Stack Developer",
+    title: "Nizar Nur Afif — Software Engineer",
     description:
       "Software Engineer passionate about building scalable web applications, robust backend systems, and modern mobile experiences.",
     type: "website",

@@ -591,7 +591,7 @@ export default async function Home() {
                   <span className="text-[var(--text-muted)]">/</span>
                   <span>Kudus, Indonesia</span>
                   <span className="text-[var(--text-muted)]">/</span>
-                  <span>Software Engineer · Full Stack Developer</span>
+                  <span>Software Engineer</span>
                 </div>
               </MotionReveal>
 
@@ -658,7 +658,7 @@ export default async function Home() {
                   <figcaption className="mt-2.5 flex items-center justify-between border-t border-[var(--border-subtle)] pt-2.5 font-mono text-[10px] uppercase tracking-widest text-[var(--text-secondary)]">
                     <span>Nizar Nur Afif</span>
                     <span className="text-[var(--text-muted)]">
-                      SWE / Full Stack
+                      Software Engineer
                     </span>
                   </figcaption>
                 </figure>
