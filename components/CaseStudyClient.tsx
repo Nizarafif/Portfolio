@@ -1,15 +1,12 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import {
   ArrowLeft,
   ArrowUpRight,
   Check,
-  Maximize2,
-  X,
   Loader2,
 } from "lucide-react";
 import { SiGithub as Github } from "react-icons/si";
@@ -21,7 +18,6 @@ interface CaseStudyClientProps {
 }
 
 export default function CaseStudyClient({ data }: CaseStudyClientProps) {
-  const [activeImage, setActiveImage] = useState<string | null>(null);
   const [isReturningHome, setIsReturningHome] = useState(false);
   const router = useRouter();
   const prefersReducedMotion = useReducedMotion();
@@ -29,14 +25,6 @@ export default function CaseStudyClient({ data }: CaseStudyClientProps) {
   useEffect(() => {
     router.prefetch("/");
   }, [router]);
-
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape") setActiveImage(null);
-    };
-    window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
-  }, []);
 
   const handleBackHome = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -125,19 +113,6 @@ export default function CaseStudyClient({ data }: CaseStudyClientProps) {
               Role:{" "}
               <span className="text-[var(--text-primary)]">{data.role}</span>
             </p>
-
-            {data.image_url && (
-              <div className="relative h-[260px] w-full overflow-hidden border border-[var(--border-subtle)] bg-[var(--bg-surface)] sm:h-[440px]">
-                <Image
-                  src={data.image_url}
-                  alt={`${data.title} preview`}
-                  fill
-                  className="object-cover object-top"
-                  sizes="(max-width: 1024px) 100vw, 1024px"
-                  priority
-                />
-              </div>
-            )}
 
             {/* Metadata Strip */}
             <div className="grid border border-[var(--border-subtle)] bg-[var(--bg-surface)] sm:grid-cols-4">
@@ -261,36 +236,6 @@ export default function CaseStudyClient({ data }: CaseStudyClientProps) {
             </div>
           </section>
 
-          {/* Gallery */}
-          {data.gallery && data.gallery.length > 0 && (
-            <section className="space-y-5">
-              <h2 className="font-mono text-xs uppercase tracking-widest text-[var(--text-secondary)]">
-                Project Preview
-              </h2>
-              <div className="grid gap-5 sm:grid-cols-3">
-                {data.gallery.map((imgUrl, idx) => (
-                  <button
-                    key={idx}
-                    type="button"
-                    onClick={() => setActiveImage(imgUrl)}
-                    className="group relative h-48 w-full cursor-zoom-in overflow-hidden border border-[var(--border-subtle)] bg-[var(--bg-surface)] text-left"
-                  >
-                    <Image
-                      src={imgUrl}
-                      alt={`${data.title} gallery ${idx + 1}`}
-                      fill
-                      className="object-cover object-top transition-transform duration-300 group-hover:scale-105"
-                      sizes="(max-width: 768px) 100vw, 33vw"
-                    />
-                    <div className="absolute inset-0 flex items-center justify-center bg-black/0 transition-colors group-hover:bg-black/40">
-                      <Maximize2 className="h-5 w-5 text-white opacity-0 transition-opacity group-hover:opacity-100" />
-                    </div>
-                  </button>
-                ))}
-              </div>
-            </section>
-          )}
-
           {/* Bottom Actions */}
           <div className="flex flex-wrap items-center justify-between gap-4 border-t border-[var(--border-subtle)] pt-8">
             <button
@@ -326,43 +271,6 @@ export default function CaseStudyClient({ data }: CaseStudyClientProps) {
           </div>
         </motion.div>
       </main>
-
-      {/* Lightbox Modal */}
-      <AnimatePresence>
-        {activeImage && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            onClick={() => setActiveImage(null)}
-            className="fixed inset-0 z-50 flex cursor-zoom-out items-center justify-center bg-black/90 p-6 backdrop-blur-sm"
-          >
-            <button
-              type="button"
-              onClick={() => setActiveImage(null)}
-              aria-label="Close image preview"
-              className="absolute right-6 top-6 flex h-10 w-10 items-center justify-center rounded-sm border border-white/20 bg-[#111111] text-[#F5F5F5] hover:border-white/40"
-            >
-              <X className="h-5 w-5" />
-            </button>
-            <motion.div
-              initial={{ scale: 0.96 }}
-              animate={{ scale: 1 }}
-              exit={{ scale: 0.96 }}
-              className="relative h-[75vh] w-full max-w-5xl"
-            >
-              <Image
-                src={activeImage}
-                alt="Project preview detail"
-                fill
-                className="object-contain"
-                sizes="100vw"
-                priority
-              />
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
     </div>
   );
 }

@@ -838,84 +838,80 @@ export default async function Home() {
             {/* Lead Featured Project */}
             {featuredProject && (
               <MotionReveal className="md:col-span-2">
-                <article className="group grid overflow-hidden border border-[var(--border-subtle)] bg-[var(--bg-surface)] transition-colors hover:border-[var(--border-hover)] md:grid-cols-12">
-                  <div className="relative aspect-[16/10] w-full overflow-hidden border-b border-[var(--border-subtle)] bg-[var(--bg-surface-hover)] md:col-span-7 md:aspect-auto md:min-h-[360px] md:border-b-0 md:border-r">
-                    {featuredProject.image_url ? (
-                      <Image
-                        src={featuredProject.image_url}
-                        alt={`${featuredProject.title} preview`}
-                        fill
-                        priority
-                        sizes="(max-width: 768px) 100vw, 60vw"
-                        className="object-cover object-top transition-transform duration-500 group-hover:scale-[1.02]"
-                      />
-                    ) : (
-                      <div className="flex h-full items-center justify-center font-mono text-xs text-[var(--text-muted)]">
-                        No Preview Available
+                <article className="group flex flex-col justify-between border border-[var(--border-subtle)] bg-[var(--bg-surface)] p-6 transition-colors hover:border-[var(--border-hover)] sm:p-8">
+                  <div className="space-y-6">
+                    <div className="flex items-center justify-between gap-2 font-mono text-[11px] uppercase tracking-widest text-[var(--text-secondary)]">
+                      <span className="text-[var(--accent)]">
+                        Featured / 01
+                      </span>
+                      <span className="truncate">{featuredProject.role}</span>
+                    </div>
+
+                    <div className="grid gap-6 md:grid-cols-12 md:items-start">
+                      <div className="space-y-4 md:col-span-7">
+                        <h3 className="text-2xl font-semibold tracking-tight text-[var(--text-primary)] sm:text-3xl">
+                          {featuredProject.title}
+                        </h3>
+
+                        <p className="text-sm leading-relaxed text-[var(--text-secondary)]">
+                          {featuredProject.problem}
+                        </p>
+
+                        <div className="flex flex-wrap gap-1.5 pt-2">
+                          {featuredProject.tech.map((tech) => (
+                            <span
+                              key={tech}
+                              className="border border-[var(--border-subtle)] bg-[var(--bg-primary)] px-2.5 py-1 font-mono text-[10px] text-[var(--text-secondary)]"
+                            >
+                              {tech}
+                            </span>
+                          ))}
+                        </div>
                       </div>
-                    )}
+
+                      {(featuredProject.result || featuredProject.solution) && (
+                        <div className="space-y-2 border border-[var(--border-subtle)] bg-[var(--bg-primary)] p-5 md:col-span-5">
+                          <span className="block font-mono text-[10px] uppercase tracking-widest text-[var(--accent)]">
+                            Key Outcome
+                          </span>
+                          <p className="text-sm leading-relaxed text-[var(--text-secondary)]">
+                            {featuredProject.result || featuredProject.solution}
+                          </p>
+                        </div>
+                      )}
+                    </div>
                   </div>
 
-                  <div className="flex flex-col justify-between p-6 sm:p-8 md:col-span-5">
-                    <div className="space-y-4">
-                      <div className="flex items-center justify-between gap-2 font-mono text-[11px] uppercase tracking-widest text-[var(--text-secondary)]">
-                        <span className="text-[var(--accent)]">
-                          Featured / 01
-                        </span>
-                        <span className="truncate">{featuredProject.role}</span>
-                      </div>
-
-                      <h3 className="text-2xl font-semibold tracking-tight text-[var(--text-primary)]">
-                        {featuredProject.title}
-                      </h3>
-
-                      <p className="text-sm leading-relaxed text-[var(--text-secondary)]">
-                        {featuredProject.problem}
-                      </p>
-
-                      <div className="flex flex-wrap gap-1.5 pt-2">
-                        {featuredProject.tech.map((tech) => (
-                          <span
-                            key={tech}
-                            className="border border-[var(--border-subtle)] bg-[var(--bg-primary)] px-2.5 py-1 font-mono text-[10px] text-[var(--text-secondary)]"
-                          >
-                            {tech}
-                          </span>
-                        ))}
-                      </div>
+                  <div className="mt-8 flex flex-wrap items-center justify-between gap-4 border-t border-[var(--border-subtle)] pt-5">
+                    <div className="flex items-center gap-5">
+                      {featuredProject.github && (
+                        <a
+                          href={featuredProject.github}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-1.5 text-xs font-medium text-[var(--text-secondary)] transition-colors hover:text-[var(--text-primary)]"
+                        >
+                          <Github className="h-3.5 w-3.5" />
+                          <span>Source Code</span>
+                        </a>
+                      )}
+                      {featuredProject.demo && (
+                        <a
+                          href={featuredProject.demo}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-1 text-xs font-medium text-[var(--text-secondary)] transition-colors hover:text-[var(--text-primary)]"
+                        >
+                          <span>Live Demo</span>
+                          <ArrowUpRight className="h-3.5 w-3.5" />
+                        </a>
+                      )}
                     </div>
 
-                    <div className="mt-8 flex flex-wrap items-center justify-between gap-4 border-t border-[var(--border-subtle)] pt-5">
-                      <div className="flex items-center gap-5">
-                        {featuredProject.github && (
-                          <a
-                            href={featuredProject.github}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="inline-flex items-center gap-1.5 text-xs font-medium text-[var(--text-secondary)] transition-colors hover:text-[var(--text-primary)]"
-                          >
-                            <Github className="h-3.5 w-3.5" />
-                            <span>Source Code</span>
-                          </a>
-                        )}
-                        {featuredProject.demo && (
-                          <a
-                            href={featuredProject.demo}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="inline-flex items-center gap-1 text-xs font-medium text-[var(--text-secondary)] transition-colors hover:text-[var(--text-primary)]"
-                          >
-                            <span>Live Demo</span>
-                            <ArrowUpRight className="h-3.5 w-3.5" />
-                          </a>
-                        )}
-                      </div>
-
-                      <CaseStudyLink
-                        href={getCaseStudyLink(featuredProject)}
-                        projectTitle={featuredProject.title}
-                      />
-                    </div>
+                    <CaseStudyLink
+                      href={getCaseStudyLink(featuredProject)}
+                      projectTitle={featuredProject.title}
+                    />
                   </div>
                 </article>
               </MotionReveal>
@@ -927,83 +923,65 @@ export default async function Home() {
                 key={project.id || project.title}
                 delay={idx * 0.05}
               >
-                <article className="group flex h-full flex-col overflow-hidden border border-[var(--border-subtle)] bg-[var(--bg-surface)] transition-colors hover:border-[var(--border-hover)]">
-                  <div className="relative aspect-[16/10] w-full overflow-hidden border-b border-[var(--border-subtle)] bg-[var(--bg-surface-hover)]">
-                    {project.image_url ? (
-                      <Image
-                        src={project.image_url}
-                        alt={`${project.title} preview`}
-                        fill
-                        sizes="(max-width: 768px) 100vw, 50vw"
-                        className="object-cover object-top transition-transform duration-500 group-hover:scale-[1.02]"
-                      />
-                    ) : (
-                      <div className="flex h-full items-center justify-center font-mono text-xs text-[var(--text-muted)]">
-                        No Preview Available
-                      </div>
-                    )}
+                <article className="group flex h-full flex-col justify-between border border-[var(--border-subtle)] bg-[var(--bg-surface)] p-6 transition-colors hover:border-[var(--border-hover)]">
+                  <div className="space-y-3">
+                    <div className="flex items-center justify-between gap-2 font-mono text-[10px] uppercase tracking-widest text-[var(--text-muted)]">
+                      <span>0{idx + 2}</span>
+                      <span className="truncate text-[var(--text-secondary)]">
+                        {project.role}
+                      </span>
+                    </div>
+
+                    <h3 className="text-xl font-semibold tracking-tight text-[var(--text-primary)]">
+                      {project.title}
+                    </h3>
+
+                    <p className="line-clamp-3 text-sm leading-relaxed text-[var(--text-secondary)]">
+                      {project.problem}
+                    </p>
+
+                    <div className="flex flex-wrap gap-1.5 pt-2">
+                      {project.tech.map((tech) => (
+                        <span
+                          key={tech}
+                          className="border border-[var(--border-subtle)] bg-[var(--bg-primary)] px-2 py-0.5 font-mono text-[10px] text-[var(--text-secondary)]"
+                        >
+                          {tech}
+                        </span>
+                      ))}
+                    </div>
                   </div>
 
-                  <div className="flex flex-1 flex-col justify-between p-6">
-                    <div className="space-y-3">
-                      <div className="flex items-center justify-between gap-2 font-mono text-[10px] uppercase tracking-widest text-[var(--text-muted)]">
-                        <span>0{idx + 2}</span>
-                        <span className="truncate text-[var(--text-secondary)]">
-                          {project.role}
-                        </span>
-                      </div>
-
-                      <h3 className="text-xl font-semibold tracking-tight text-[var(--text-primary)]">
-                        {project.title}
-                      </h3>
-
-                      <p className="line-clamp-3 text-sm leading-relaxed text-[var(--text-secondary)]">
-                        {project.problem}
-                      </p>
-
-                      <div className="flex flex-wrap gap-1.5 pt-2">
-                        {project.tech.map((tech) => (
-                          <span
-                            key={tech}
-                            className="border border-[var(--border-subtle)] bg-[var(--bg-primary)] px-2 py-0.5 font-mono text-[10px] text-[var(--text-secondary)]"
-                          >
-                            {tech}
-                          </span>
-                        ))}
-                      </div>
+                  <div className="mt-6 flex flex-wrap items-center justify-between gap-4 border-t border-[var(--border-subtle)] pt-4">
+                    <div className="flex items-center gap-4">
+                      {project.github && (
+                        <a
+                          href={project.github}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-1.5 text-xs font-medium text-[var(--text-secondary)] transition-colors hover:text-[var(--text-primary)]"
+                        >
+                          <Github className="h-3.5 w-3.5" />
+                          <span>Source</span>
+                        </a>
+                      )}
+                      {project.demo && (
+                        <a
+                          href={project.demo}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-1 text-xs font-medium text-[var(--text-secondary)] transition-colors hover:text-[var(--text-primary)]"
+                        >
+                          <span>Demo</span>
+                          <ArrowUpRight className="h-3.5 w-3.5" />
+                        </a>
+                      )}
                     </div>
 
-                    <div className="mt-6 flex flex-wrap items-center justify-between gap-4 border-t border-[var(--border-subtle)] pt-4">
-                      <div className="flex items-center gap-4">
-                        {project.github && (
-                          <a
-                            href={project.github}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="inline-flex items-center gap-1.5 text-xs font-medium text-[var(--text-secondary)] transition-colors hover:text-[var(--text-primary)]"
-                          >
-                            <Github className="h-3.5 w-3.5" />
-                            <span>Source</span>
-                          </a>
-                        )}
-                        {project.demo && (
-                          <a
-                            href={project.demo}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="inline-flex items-center gap-1 text-xs font-medium text-[var(--text-secondary)] transition-colors hover:text-[var(--text-primary)]"
-                          >
-                            <span>Demo</span>
-                            <ArrowUpRight className="h-3.5 w-3.5" />
-                          </a>
-                        )}
-                      </div>
-
-                      <CaseStudyLink
-                        href={getCaseStudyLink(project)}
-                        projectTitle={project.title}
-                      />
-                    </div>
+                    <CaseStudyLink
+                      href={getCaseStudyLink(project)}
+                      projectTitle={project.title}
+                    />
                   </div>
                 </article>
               </MotionReveal>
