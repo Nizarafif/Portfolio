@@ -4,32 +4,51 @@ import { useEffect } from "react";
 
 export default function SmoothScroll() {
   useEffect(() => {
-    const handleAnchorClick = (e: MouseEvent, href: string) => {
-      const targetId = href.replace("#", "");
+    const scrollToTarget = (targetId: string) => {
       const element = document.getElementById(targetId);
+      if (!element) return false;
 
-      if (element) {
-        e.preventDefault();
-        const headerOffset = 96;
-        const elementPosition =
-          element.getBoundingClientRect().top + window.scrollY;
-        const offsetPosition = elementPosition - headerOffset;
+      const headerOffset = 96;
+      const elementPosition =
+        element.getBoundingClientRect().top + window.scrollY;
+      const offsetPosition = Math.max(0, elementPosition - headerOffset);
 
-        window.scrollTo({
-          top: offsetPosition,
-          behavior: "smooth",
-        });
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: "smooth",
+      });
 
-        window.history.pushState(null, "", href);
+      return true;
+    };
+
+    const stripHashFromUrl = () => {
+      if (window.location.hash) {
+        window.history.replaceState(
+          null,
+          "",
+          window.location.pathname + window.location.search
+        );
       }
     };
 
+    // Jika halaman dibuka dengan hash di URL (mis. /#home), scroll ke target lalu bersihkan URL
+    if (window.location.hash.length > 1) {
+      const initialId = window.location.hash.slice(1);
+      if (scrollToTarget(initialId)) {
+        stripHashFromUrl();
+      }
+    }
+
     const handleClick = (e: MouseEvent) => {
       const anchor = (e.target as HTMLElement).closest("a");
-      if (anchor) {
-        const href = anchor.getAttribute("href");
-        if (href && href.startsWith("#") && href.length > 1) {
-          handleAnchorClick(e, href);
+      if (!anchor) return;
+
+      const href = anchor.getAttribute("href");
+      if (href && href.startsWith("#") && href.length > 1) {
+        const targetId = href.slice(1);
+        if (scrollToTarget(targetId)) {
+          e.preventDefault();
+          stripHashFromUrl();
         }
       }
     };
