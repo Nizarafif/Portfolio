@@ -74,7 +74,13 @@ export default async function ProjectCaseStudyPage({ params }: PageProps) {
       if (dbProject) {
         // Double check if database title matches static data
         const titleLower = dbProject.title.toLowerCase();
-        if (titleLower.includes("resumora")) {
+        if (titleLower.includes("smartpay")) {
+          caseStudy = caseStudiesMap["smartpay"];
+        } else if (titleLower.includes("cvmatch")) {
+          caseStudy = caseStudiesMap["cvmatch"];
+        } else if (titleLower.includes("riseup")) {
+          caseStudy = caseStudiesMap["riseup"];
+        } else if (titleLower.includes("resumora")) {
           caseStudy = caseStudiesMap["resumora"];
         } else if (titleLower.includes("nexaops")) {
           caseStudy = caseStudiesMap["nexaops"];

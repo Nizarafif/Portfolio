@@ -15,16 +15,28 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Nizar Nur Afif — Software Engineer",
+  title: "Nizar Nur Afif — Junior Full Stack Developer | Laravel & React",
   description:
-    "Personal developer portfolio of Nizar Nur Afif, Software Engineer from Kudus, Indonesia focused on scalable web applications, backend systems, and modern mobile experiences.",
+    "Portfolio of Nizar Nur Afif, Junior Full Stack Developer specializing in PHP, Laravel, React, JavaScript, and MySQL. Software Engineering graduate from Politeknik Balekambang Jepara.",
   icons: {
     icon: "/nizar-logo.png",
   },
+  keywords: [
+    "Nizar Nur Afif",
+    "Junior Full Stack Developer",
+    "Junior Web Developer",
+    "Programmer IT",
+    "Laravel Developer",
+    "PHP Developer",
+    "React Developer",
+    "Full Stack Developer Indonesia",
+    "Web Developer Kudus",
+  ],
+  authors: [{ name: "Nizar Nur Afif" }],
   openGraph: {
-    title: "Nizar Nur Afif — Software Engineer",
+    title: "Nizar Nur Afif — Junior Full Stack Developer | Laravel & React",
     description:
-      "Software Engineer passionate about building scalable web applications, robust backend systems, and modern mobile experiences.",
+      "Software Engineering graduate specializing in backend and full-stack web application development with PHP, Laravel, React, and MySQL.",
     type: "website",
   },
 };
@@ -56,7 +68,7 @@ export default function RootLayout({
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
       </head>
-      <body className="font-sans bg-[var(--bg-primary)] text-[var(--text-primary)] antialiased selection:bg-[#3B82F6]/30 selection:text-[var(--text-primary)]">
+      <body className="font-sans bg-[var(--bg-primary)] text-[var(--text-primary)] antialiased selection:bg-emerald-500/25 selection:text-[var(--text-primary)]">
         {children}
       </body>
     </html>

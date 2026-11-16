@@ -156,10 +156,10 @@ export default function GitHubActivity() {
   const getCellStyle = (level: number): string => {
     if (level <= 0)
       return "bg-[var(--bg-surface-hover)] border border-[var(--border-subtle)]";
-    if (level === 1) return "bg-blue-200 dark:bg-[#1E3A5F]";
-    if (level === 2) return "bg-blue-400 dark:bg-[#1D4ED8]";
-    if (level === 3) return "bg-blue-500 dark:bg-[#3B82F6]";
-    return "bg-blue-700 dark:bg-[#60A5FA]";
+    if (level === 1) return "bg-emerald-900/60 dark:bg-emerald-950 border border-emerald-800/30";
+    if (level === 2) return "bg-emerald-700/70 dark:bg-emerald-800";
+    if (level === 3) return "bg-emerald-500 dark:bg-emerald-600";
+    return "bg-emerald-400 dark:bg-emerald-400";
   };
 
   return (
@@ -243,10 +243,10 @@ export default function GitHubActivity() {
         <div className="mt-4 flex items-center justify-end gap-1.5 border-t border-[var(--border-subtle)] pt-3 font-mono text-[10px] text-[var(--text-muted)]">
           <span>Less</span>
           <span className="h-2.5 w-2.5 rounded-[2px] border border-[var(--border-subtle)] bg-[var(--bg-surface-hover)]" />
-          <span className="h-2.5 w-2.5 rounded-[2px] bg-blue-200 dark:bg-[#1E3A5F]" />
-          <span className="h-2.5 w-2.5 rounded-[2px] bg-blue-400 dark:bg-[#1D4ED8]" />
-          <span className="h-2.5 w-2.5 rounded-[2px] bg-blue-500 dark:bg-[#3B82F6]" />
-          <span className="h-2.5 w-2.5 rounded-[2px] bg-blue-700 dark:bg-[#60A5FA]" />
+          <span className="h-2.5 w-2.5 rounded-[2px] bg-emerald-900/60 dark:bg-emerald-950 border border-emerald-800/30" />
+          <span className="h-2.5 w-2.5 rounded-[2px] bg-emerald-700/70 dark:bg-emerald-800" />
+          <span className="h-2.5 w-2.5 rounded-[2px] bg-emerald-500 dark:bg-emerald-600" />
+          <span className="h-2.5 w-2.5 rounded-[2px] bg-emerald-400 dark:bg-emerald-400" />
           <span>More</span>
         </div>
       </div>

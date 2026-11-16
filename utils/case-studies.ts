@@ -19,6 +19,117 @@ export interface CaseStudyData {
 }
 
 export const caseStudiesMap: Record<string, CaseStudyData> = {
+  smartpay: {
+    title: "SmartPay Dosen",
+    role: "Full Stack Developer",
+    category: "Payroll Management System",
+    timeline: "2024",
+    status: "Completed",
+    tech: ["Laravel", "React", "MySQL", "Tailwind CSS", "REST API"],
+    github: "https://github.com/Nizarafif",
+    demo: "",
+    image_url: "",
+    problem:
+      "Pengelolaan penggajian dosen di institusi pendidikan sering kali masih manual, rentan terhadap kesalahan kalkulasi honor SKS, serta minim rekap histori status pembayaran transparan.",
+    solution:
+      "Mengembangkan aplikasi web pengelolaan payroll dosen terpadu berbasis Laravel dan React. Memungkinkan otomasi kalkulasi gaji, manajemen data dosen, transparansi status pembayaran, serta ringkasan statistik komprehensif pada dashboard.",
+    keyFeatures: [
+      "Manajemen Data Dosen & Penugasan Mengajar",
+      "Kalkulasi & Rekapitulasi Gaji / Honor Dosen Otomatis",
+      "Pelacakan Status Pembayaran (Pending, Diproses, Selesai)",
+      "Riwayat Pembayaran & Bukti Slip Gaji Transparan",
+      "Dashboard Statistik & Visualisasi Pengeluaran Payroll"
+    ],
+    systemArchitecture: `React Frontend (SPA)
+      ↓
+RESTful API Layer (Laravel Controller & Services)
+      ↓
+Business Logic (Payroll Calculator Engine)
+      ↓
+MySQL Relational Database`,
+    challenges:
+      "Memastikan keakuratan perhitungan nominal honorarium berdasarkan komponen variabel dan status keaktifan dosen tanpa terjadinya duplikasi pencatatan.",
+    resultsMetrics: [
+      "Otomasi perhitungan honorarium dosen secara sistematis",
+      "Pencatatan riwayat transaksi gaji yang terpusat dan terstruktur",
+      "Dashboard statistik yang memudahkan pemantauan anggaran payroll"
+    ],
+    gallery: []
+  },
+  cvmatch: {
+    title: "CVMatch",
+    role: "Full Stack Developer",
+    category: "Recruitment Tool (Prototype)",
+    timeline: "2024",
+    status: "Prototype",
+    tech: ["Laravel", "PHP", "MySQL", "Tailwind CSS"],
+    github: "https://github.com/Nizarafif",
+    demo: "",
+    image_url: "",
+    problem:
+      "Pelamar kerja kesulitan mengukur seberapa relevan CV mereka terhadap kualifikasi spesifik yang dicari recruiter pada suatu lowongan pekerjaan.",
+    solution:
+      "Membangun prototipe aplikasi pencocokan CV dan deskripsi pekerjaan. Membantu pelamar mengunggah dokumen CV atau teks, membandingkannya dengan kebutuhan lowongan kerja, menghasilkan skor kecocokan, serta memberikan saran perbaikan kata kunci.",
+    keyFeatures: [
+      "Input Dokumen CV (PDF) & Ekstraksi Teks CV",
+      "Form Input Deskripsi & Kualifikasi Lowongan Kerja",
+      "Algoritma Skoring Kompatibilitas Relevansi Kualifikasi",
+      "Rekomendasi Perbaikan & Kata Kunci Relevan yang Kurang",
+      "Dashboard Riwayat Analisis Kecocokan CV"
+    ],
+    systemArchitecture: `Web Interface (Laravel Blade / Client)
+      ↓
+Text Processing & Extraction Service (PHP)
+      ↓
+Compatibility & Keyword Matching Engine
+      ↓
+Database Logging (MySQL)`,
+    challenges:
+      "Mengekstraksi teks dari format berkas PDF secara konsisten dan melakukan pencocokan terminologi keterampilan teknis yang bervariasi.",
+    resultsMetrics: [
+      "Prototipe kalkulasi skor kecocokan CV dengan job requirement",
+      "Ekstraksi teks CV cepat untuk evaluasi relevansi kata kunci",
+      "Umpan balik langsung bagi pelamar untuk menyempurnakan berkas lamaran"
+    ],
+    gallery: []
+  },
+  riseup: {
+    title: "RISEUP",
+    role: "Mobile Developer",
+    category: "Mobile Application",
+    timeline: "2024 - 2026",
+    status: "In Development",
+    tech: ["Flutter", "Dart", "REST API", "Expert System"],
+    github: "https://github.com/Nizarafif",
+    demo: "",
+    image_url: "",
+    problem:
+      "Terbatasnya akses awal skrining dan pemantauan kondisi kesehatan mental secara mandiri bagi mahasiswa dan generasi muda karena stigma serta keterbatasan tenaga konseling.",
+    solution:
+      "Mengembangkan aplikasi mobile RISEUP menggunakan Flutter dengan pendekatan Sistem Pakar (Expert System) untuk membantu pengguna melakukan pemantauan kondisi kesehatan mental, mendapatkan deteksi indikasi awal, serta panduan tindak lanjut.",
+    keyFeatures: [
+      "Skrining & Kuesioner Interaktif Kesehatan Mental",
+      "Inference Engine Sistem Pakar (Rule-Based Expert System)",
+      "Daily Mood & Stress Tracker",
+      "Rekomendasi Penanganan Mandiri & Saran Profesional",
+      "Tercatat Resmi HKI Program Komputer Kementerian Hukum RI"
+    ],
+    systemArchitecture: `Flutter Mobile Client (Android)
+      ↓
+Expert System Inference Rule Engine (Dart)
+      ↓
+REST API Integration & State Persistence
+      ↓
+Secure Storage & Backend Service`,
+    challenges:
+      "Menyusun aturan sistem pakar yang teruji secara metodologi serta membangun antarmuka pengguna yang menenangkan dan mudah digunakan.",
+    resultsMetrics: [
+      "Terdaftar Hak Cipta Program Komputer Resmi dari Kemenkum RI (DJKI)",
+      "Aplikasi mobile berbasis Flutter yang responsif dan ringan",
+      "Model inference sistem pakar yang dapat diuji dan diperluas"
+    ],
+    gallery: []
+  },
   "e-commerce": {
     title: "E-Commerce App",
     role: "Fullstack Developer",
